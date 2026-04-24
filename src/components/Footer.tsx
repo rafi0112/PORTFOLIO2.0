@@ -35,7 +35,7 @@ export default function Footer({ gotoSection }: FooterProps) {
           </a>
           <a
             className="fl-link"
-            href="https://linkedin.com/in/khandaker-rafiul-islam"
+            href="https://www.linkedin.com/in/khandaker-rafiul-islam-6b80882b2/"
             target="_blank"
             rel="noopener noreferrer"
           >

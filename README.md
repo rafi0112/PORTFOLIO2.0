@@ -40,13 +40,34 @@ npm install
 
 ### Development
 
-Start the development server:
+Start frontend + backend together:
 
 ```bash
-npm run dev
+npm run dev:full
 ```
 
 The application will be available at `http://localhost:5173`
+
+Backend contact API runs at `http://localhost:5000`
+
+### Contact Backend Setup (SMTP)
+
+The contact form sends email through a backend server located at `server/index.js`.
+
+1. Copy `server/.env.example` to `server/.env`
+2. Fill in your SMTP credentials:
+
+```bash
+PORT=5000
+CLIENT_ORIGIN=http://localhost:5173
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_SECURE=false
+SMTP_USER=your_smtp_user
+SMTP_PASS=your_smtp_app_password
+CONTACT_TO_EMAIL=your_email@example.com
+CONTACT_FROM_EMAIL=Portfolio Contact <your_smtp_user>
+```
 
 ### Build
 
@@ -81,6 +102,9 @@ src/
 ├── App.tsx                     # Main app component
 ├── main.tsx                    # React entry point
 └── index.css                   # Global styles and theme system
+server/
+├── index.js                    # Express API for contact form
+└── .env.example                # Backend environment template
 ```
 
 ## Features Overview

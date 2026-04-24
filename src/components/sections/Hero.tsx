@@ -91,7 +91,10 @@ export default function Hero() {
 
       <RevealOnScroll delay={0.42}>
         <div className="hero-ctas">
-          <a className="btn-p" href="mailto:rafi011235@gmail.com">
+          <a
+            className="btn-p"
+            href="mailto:rafi011235@gmail.com?subject=Portfolio%20Inquiry&body=Hi%20Rafiul%2C"
+          >
             ✉ Get in Touch
           </a>
           <a
@@ -104,7 +107,7 @@ export default function Hero() {
           </a>
           <a
             className="btn-o"
-            href="https://linkedin.com/in/khandaker-rafiul-islam"
+            href="https://www.linkedin.com/in/khandaker-rafiul-islam-6b80882b2/"
             target="_blank"
             rel="noopener noreferrer"
           >

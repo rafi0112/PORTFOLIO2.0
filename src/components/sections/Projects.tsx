@@ -30,7 +30,7 @@ const projects: Project[] = [
     techs: ["MongoDB", "Express.js", "React", "Node.js", "JWT"],
     links: [
       { label: "⌥ GitHub", url: "https://github.com/rafi0112" },
-      { label: "↗ Live Demo", url: "#" },
+      { label: "↗ Live Demo", url: "https://groupstudyonline.web.app/" },
     ],
   },
   {
@@ -46,7 +46,12 @@ const projects: Project[] = [
       "Streamlined communication with integrated notification and listing services.",
     ],
     techs: ["React Native", "Node.js", "MongoDB", "REST API"],
-    links: [{ label: "⌥ GitHub", url: "https://github.com/rafi0112" }],
+    links: [
+      {
+        label: "⌥ GitHub",
+        url: "https://github.com/rafi0112/agricultural-app",
+      },
+    ],
   },
 ];
 

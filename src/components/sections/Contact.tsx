@@ -1,5 +1,7 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import RevealOnScroll from "../RevealOnScroll";
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -9,15 +11,14 @@ export default function Contact() {
   });
   const [formMessage, setFormMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const submitBtnRef = useRef<HTMLButtonElement>(null);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
-    const { id, value } = e.target;
+    const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [id.replace("c", "")]: value,
+      [name]: value,
     }));
   };
 
@@ -29,30 +30,42 @@ export default function Contact() {
       return;
     }
 
-    if (submitBtnRef.current) {
-      setIsSubmitting(true);
-      submitBtnRef.current.textContent = "Sending...";
-      submitBtnRef.current.disabled = true;
+    const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    if (!isValidEmail) {
+      setFormMessage("// Please enter a valid email address.");
+      return;
     }
 
-    // Simulate sending
-    setTimeout(() => {
-      setFormMessage("// Message sent! I'll reply within 24 hours.");
-      if (submitBtnRef.current) {
-        submitBtnRef.current.textContent = "Sent ✓";
-      }
-      setFormData({ name: "", email: "", message: "" });
-      setIsSubmitting(false);
+    setIsSubmitting(true);
+    setFormMessage("");
 
-      // Reset after 3 seconds
-      setTimeout(() => {
-        if (submitBtnRef.current) {
-          submitBtnRef.current.textContent = "Send Message ↗";
-          submitBtnRef.current.disabled = false;
-        }
-        setFormMessage("");
-      }, 3000);
-    }, 1100);
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/contact`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, message }),
+      });
+
+      if (!response.ok) {
+        const errorData = (await response.json().catch(() => ({}))) as {
+          error?: string;
+        };
+        throw new Error(errorData.error || "Failed to send message.");
+      }
+
+      setFormMessage("// Message sent! I'll reply within 24 hours.");
+      setFormData({ name: "", email: "", message: "" });
+    } catch (error) {
+      const msg =
+        error instanceof Error
+          ? error.message
+          : "Failed to send message. Please try again.";
+      setFormMessage(`// ${msg}`);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -76,7 +89,10 @@ export default function Contact() {
               is always open. I'll reply within 24 hours.
             </p>
             <div className="c-links">
-              <a className="c-link" href="mailto:rafi011235@gmail.com">
+              <a
+                className="c-link"
+                href="mailto:rafi011235@gmail.com?subject=Portfolio%20Inquiry&body=Hi%20Rafiul%2C"
+              >
                 <div className="c-link-icon">✉</div>
                 <div>
                   <div className="c-link-label">Email</div>
@@ -94,7 +110,7 @@ export default function Contact() {
               </a>
               <a
                 className="c-link"
-                href="https://linkedin.com/in/khandaker-rafiul-islam"
+                href="https://www.linkedin.com/in/khandaker-rafiul-islam-6b80882b2/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -131,6 +147,7 @@ export default function Contact() {
                 className="fi"
                 type="text"
                 id="cName"
+                name="name"
                 placeholder="Your name"
                 value={formData.name}
                 onChange={handleInputChange}
@@ -142,6 +159,7 @@ export default function Contact() {
                 className="fi"
                 type="email"
                 id="cEmail"
+                name="email"
                 placeholder="your@email.com"
                 value={formData.email}
                 onChange={handleInputChange}
@@ -152,6 +170,7 @@ export default function Contact() {
               <textarea
                 className="fta"
                 id="cMessage"
+                name="message"
                 placeholder="Tell me about your project or opportunity..."
                 value={formData.message}
                 onChange={handleInputChange}
@@ -159,11 +178,10 @@ export default function Contact() {
             </div>
             <button
               className="fsub"
-              ref={submitBtnRef}
               onClick={handleForm}
               disabled={isSubmitting}
             >
-              Send Message ↗
+              {isSubmitting ? "Sending..." : "Send Message ↗"}
             </button>
             <div className="fmsg" style={{ color: "var(--acc)" }}>
               {formMessage}
