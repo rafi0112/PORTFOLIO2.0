@@ -15,6 +15,28 @@ interface Project {
 
 const projects: Project[] = [
   {
+    title: "NestMate",
+    subtitle: "// roommate finder & household hub",
+    icon: "🏠",
+    bannerClass: "proj-banner-3",
+    badgeClass: "badge-live",
+    badgeText: "● LIVE",
+    points: [
+      "Full-stack platform for browsing roommate listings, direct messaging, and household management.",
+      "Integrated Household Hub with automated meal ledgers, expense tracking, and fair-share calculation system.",
+      "Real-time communication features including group room chats and listing inquiry forwarding via DB polling.",
+      "Dual-mode authentication supporting both Firebase production and a localized demo mode for instant access.",
+    ],
+    techs: ["Next.js", "TypeScript", "Express.js", "MongoDB", "Firebase"],
+    links: [
+      { label: "⌥ GitHub", url: "https://github.com/rafi0112/nestmate" },
+      {
+        label: "↗ Live Demo",
+        url: "https://frontend-eight-gamma-99.vercel.app/",
+      },
+    ],
+  },
+  {
     title: "StudyTogether",
     subtitle: "// peer collaboration platform",
     icon: "📚",
@@ -54,7 +76,6 @@ const projects: Project[] = [
     ],
   },
 ];
-
 interface ProjectCardProps {
   project: Project;
 }
