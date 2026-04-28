@@ -23,17 +23,19 @@ const projects: Project[] = [
     badgeText: "● LIVE",
     points: [
       "Full-stack platform for browsing roommate listings, direct messaging, and household management.",
+      "Developed using a decoupled architecture with separate Frontend (Next.js) and Backend (Express) services.", // <--- Added technical depth
       "Integrated Household Hub with automated meal ledgers, expense tracking, and fair-share calculation system.",
       "Real-time communication features including group room chats and listing inquiry forwarding via DB polling.",
       "Dual-mode authentication supporting both Firebase production and a localized demo mode for instant access.",
     ],
     techs: ["Next.js", "TypeScript", "Express.js", "MongoDB", "Firebase"],
     links: [
-      { label: "⌥ GitHub", url: "https://github.com/rafi0112/nestmate" },
       {
-        label: "↗ Live Demo",
-        url: "https://frontend-eight-gamma-99.vercel.app/",
+        label: "⌥ Client",
+        url: "https://github.com/rafi0112/nestmate-frontend",
       },
+      { label: "⌥ Server", url: "https://github.com/rafi0112/nestmate-backend" },
+      { label: "↗ Live Demo", url: "https://nestmate00.vercel.app" },
     ],
   },
   {
