@@ -22,20 +22,22 @@ const projects: Project[] = [
     badgeClass: "badge-live",
     badgeText: "● LIVE",
     points: [
-      "Full-stack platform for browsing roommate listings, direct messaging, and household management.",
-      "Developed using a decoupled architecture with separate Frontend (Next.js) and Backend (Express) services.", // <--- Added technical depth
-      "Integrated Household Hub with automated meal ledgers, expense tracking, and fair-share calculation system.",
-      "Real-time communication features including group room chats and listing inquiry forwarding via DB polling.",
-      "Dual-mode authentication supporting both Firebase production and a localized demo mode for instant access.",
+    "Roommate discovery platform for browsing verified listings, saving favorites, and contacting hosts directly.",
+    "Direct messaging system with conversation tracking and listing inquiry forwarding for faster roommate communication.",
+    "Household Hub for managing shared living with member tracking, join-code access, and room-based organization.",
+    "Automated meal ledger and expense tracking with fair-share calculations for groceries, rent, and monthly dues.",
+    "Real-time room chat for household members, keeping group communication inside one shared space.",
+    "Production-ready authentication and data persistence using Firebase Auth and MongoDB-backed storage.",
+    "Responsive frontend experience designed for mobile and desktop with clean profile, listing, and household workflows.",
     ],
     techs: ["Next.js", "TypeScript", "Express.js", "MongoDB", "Firebase"],
     links: [
-      {
-        label: "⌥ Client",
-        url: "https://github.com/rafi0112/nestmate-frontend",
-      },
-      { label: "⌥ Server", url: "https://github.com/rafi0112/nestmate-backend" },
-      { label: "↗ Live Demo", url: "https://nestmate00.vercel.app" },
+    {
+    label: "⌥ Client",
+    url: "https://github.com/rafi0112/nestmate-frontend",
+    },
+    { label: "⌥ Server", url: "https://github.com/rafi0112/nestmate-backend" },
+    { label: "↗ Live Demo", url: "https://nestmate00.vercel.app" },
     ],
   },
   {
