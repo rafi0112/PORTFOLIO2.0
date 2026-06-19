@@ -91,12 +91,12 @@ export default function Contact() {
             <div className="c-links">
               <a
                 className="c-link"
-                href="mailto:rafi011235@gmail.com?subject=Portfolio%20Inquiry&body=Hi%20Rafiul%2C"
+                href="mailto:rafiul.islam.khandaker@gmail.com?subject=Portfolio%20Inquiry&body=Hi%20Rafiul%2C"
               >
                 <div className="c-link-icon">✉</div>
                 <div>
                   <div className="c-link-label">Email</div>
-                  <div className="c-link-val">rafi011235@gmail.com</div>
+                  <div className="c-link-val">rafiul.islam.khandaker@gmail.com</div>
                 </div>
                 <div className="c-link-arrow">→</div>
               </a>
