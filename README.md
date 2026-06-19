@@ -188,7 +188,7 @@ document.documentElement.setAttribute("data-theme", "light" | "dark");
 
 ## Contact
 
-- **Email**: rafi011235@gmail.com
+- **Email**: rafiul.islam.khandaker@gmail.com
 - **Phone**: +880 1311 183481
 - **GitHub**: [rafi0112](https://github.com/rafi0112)
 - **LinkedIn**: [Khandaker Rafiul Islam](https://linkedin.com/in/khandaker-rafiul-islam)
