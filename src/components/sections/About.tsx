@@ -40,7 +40,7 @@ export default function About() {
               <div className="fact">
                 <div className="fact-label">Email</div>
                 <div className="fact-val" style={{ fontSize: "12px" }}>
-                  rafi011235@gmail.com
+                  rafiul.islam.khandaker@gmail.com
                 </div>
               </div>
               <div className="fact">

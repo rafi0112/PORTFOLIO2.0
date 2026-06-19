@@ -93,7 +93,7 @@ export default function Hero() {
         <div className="hero-ctas">
           <a
             className="btn-p"
-            href="mailto:rafi011235@gmail.com?subject=Portfolio%20Inquiry&body=Hi%20Rafiul%2C"
+            href="mailto:rafiul.islam.khandaker@gmail.com?subject=Portfolio%20Inquiry&body=Hi%20Rafiul%2C"
           >
             ✉ Get in Touch
           </a>
