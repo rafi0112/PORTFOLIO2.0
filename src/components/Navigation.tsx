@@ -15,7 +15,13 @@ export default function Navigation({
   mobileMenuOpen,
   setMobileMenuOpen,
 }: NavigationProps) {
-  const navItems = ["Home", "Skills", "Projects", "About", "Contact"];
+  const navItems = [
+    { label: "Home", id: "hero" },
+    { label: "Skills", id: "skills" },
+    { label: "Work", id: "projects" },
+    { label: "About", id: "about" },
+    { label: "Contact", id: "contact" },
+  ];
 
   return (
     <>
@@ -28,13 +34,11 @@ export default function Navigation({
         <div className="nav-center">
           {navItems.map((item) => (
             <button
-              key={item}
-              className={`nav-link ${
-                activeNav === item.toLowerCase() ? "active" : ""
-              }`}
-              onClick={() => gotoSection(item.toLowerCase())}
+              key={item.id}
+              className={`nav-link ${activeNav === item.id ? "active" : ""}`}
+              onClick={() => gotoSection(item.id)}
             >
-              {item}
+              {item.label}
             </button>
           ))}
         </div>
@@ -45,7 +49,7 @@ export default function Navigation({
             onClick={toggleTheme}
             aria-label="Toggle theme"
           >
-            {theme === "dark" ? "☀️" : "🌙"}
+            {theme === "dark" ? "☼" : "☾"}
           </button>
           <button className="nav-hire" onClick={() => gotoSection("contact")}>
             Hire Me →
@@ -69,14 +73,14 @@ export default function Navigation({
       >
         {navItems.map((item) => (
           <button
-            key={item}
-            className="nav-link"
+            key={item.id}
+            className={`nav-link ${activeNav === item.id ? "active" : ""}`}
             onClick={() => {
-              gotoSection(item.toLowerCase());
+              gotoSection(item.id);
               setMobileMenuOpen(false);
             }}
           >
-            {item}
+            {item.label}
           </button>
         ))}
       </div>
