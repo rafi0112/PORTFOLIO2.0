@@ -82,8 +82,10 @@ export default function Hero() {
         <RevealOnScroll delay={0.26}>
           <div className="hero-role">
             <span className="role-prefix">currently a</span>
-            <span className="role-typed">{typedText}</span>
-            <span className="typing-cursor"></span>
+            <span className="role-line">
+              <span className="role-typed">{typedText}</span>
+              <span className="typing-cursor"></span>
+            </span>
           </div>
         </RevealOnScroll>
 

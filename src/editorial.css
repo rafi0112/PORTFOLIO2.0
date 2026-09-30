@@ -317,10 +317,9 @@ section {
 .hero-role {
   display: flex;
   align-items: baseline;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 10px;
   margin-top: 30px;
-  min-height: 1.6em;
 }
 .role-prefix {
   font-family: var(--font-mono);
@@ -329,12 +328,24 @@ section {
   letter-spacing: 1.5px;
   color: var(--text3);
 }
+/* Keeps the cursor on the same line as the text in both row and column mode. */
+.role-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
 .role-typed {
   font-family: var(--font-serif);
   font-style: italic;
   font-size: clamp(20px, 2.4vw, 28px);
   color: var(--text);
+  white-space: nowrap;
   background: linear-gradient(transparent 62%, var(--acc3) 62%, var(--acc3) 90%, transparent 90%);
+}
+/* The role retypes itself forever and is empty between words. A zero-width
+   space keeps its line box at full height so the page below never shifts. */
+.role-typed::after {
+  content: "\200B";
 }
 .typing-cursor {
   width: 2px;
@@ -931,5 +942,14 @@ footer .footer-logo {
   .sticker {
     right: -8px;
     font-size: 15px;
+  }
+}
+@media (max-width: 400px) {
+  /* The longest role needs 334px beside the label; below this the pair can't
+     fit, so stack them — still a fixed two lines, whatever is being typed. */
+  .hero-role {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
   }
 }
