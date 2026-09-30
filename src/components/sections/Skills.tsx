@@ -13,6 +13,7 @@ const skills1: Skill[] = [
   { icon: "🐍", name: "Python", cat: "language", v: "v2" },
   { icon: "⚙️", name: "C++", cat: "language", v: "v3" },
   { icon: "🟨", name: "JavaScript ES6+", cat: "language", v: "v6" },
+  { icon: "🔷", name: "TypeScript", cat: "language", v: "v2" },
   { icon: "🌐", name: "React", cat: "web", v: "v2" },
   { icon: "🟢", name: "Node.js", cat: "web", v: "v4" },
   { icon: "🚂", name: "Express.js", cat: "web", v: "v1" },
@@ -30,6 +31,8 @@ const skills2: Skill[] = [
   { icon: "🧠", name: "DSA", cat: "fundamentals", v: "v4" },
   { icon: "🏗️", name: "Microservices", cat: "architecture", v: "v1" },
   { icon: "🗄️", name: "SQL & NoSQL", cat: "database", v: "v2" },
+  { icon: "🐘", name: "PostgreSQL", cat: "database", v: "v1" },
+  { icon: "⚡", name: "Supabase", cat: "backend", v: "v4" },
   { icon: "🌐", name: "RESTful APIs", cat: "backend", v: "v3" },
   { icon: "🔬", name: "Unit Testing", cat: "tools", v: "v5" },
 ];
@@ -54,8 +57,8 @@ export default function Skills() {
     <section id="skills">
       <RevealOnScroll>
         <div className="sh">
-          <div className="sh-label">// expertise</div>
-          <h2 className="sh-title">Technical Skills</h2>
+          <div className="sh-label"><span className="sh-num">01</span> Expertise</div>
+          <h2 className="sh-title">Tools I <em>reach for</em></h2>
           <p className="sh-sub">
             A multi-disciplinary toolkit spanning languages, frameworks,
             systems, and DevOps.

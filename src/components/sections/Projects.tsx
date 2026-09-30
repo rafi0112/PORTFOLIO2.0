@@ -11,9 +11,36 @@ interface Project {
   points: string[];
   techs: string[];
   links: { label: string; url: string }[];
+  image?: string;
+  featured?: boolean;
 }
 
 const projects: Project[] = [
+  {
+    title: "Oi Tesla Pool",
+    subtitle: "// direction-aware ride pooling for Dhaka",
+    icon: "🛺",
+    image: "/oi-tesla-pool.webp",
+    featured: true,
+    bannerClass: "proj-banner-4",
+    badgeClass: "badge-live",
+    badgeText: "● LIVE",
+    points: [
+      "Ride-pooling platform for battery rickshaws: riders heading within 90° of each other share one vehicle automatically, and pay 20% less.",
+      "Race-safe booking: seats are claimed with one atomic conditional UPDATE, and check-then-write flows use Postgres row locks (SELECT … FOR UPDATE).",
+      "Every ride and pool status change runs through a single finite-state machine, so illegal transitions are impossible by construction.",
+      "Live pool window with a shared countdown; each passenger can halve it exactly once, enforced in the database, not just the UI.",
+      "Driver earnings (today and all-time) computed in one query with FILTER aggregates, backed by a partial index to stay fast as data grows.",
+      "Supabase Auth with email/password plus Google and LinkedIn OAuth; a database trigger provisions profiles and vehicles on sign-up.",
+      "Integer-paisa money model, DTO-only API responses, and zod validation on every request body.",
+      "Deployed as a React/Vite frontend on Vercel and an Express API on Render, backed by Supabase Postgres.",
+    ],
+    techs: ["React", "TypeScript", "Node.js", "Express", "PostgreSQL", "Supabase", "Tailwind CSS"],
+    links: [
+      { label: "⌥ GitHub", url: "https://github.com/rafi0112/oi-tesla-pool" },
+      { label: "↗ Live Demo", url: "https://oi-tesla-pool.vercel.app" },
+    ],
+  },
   {
     title: "NestMate",
     subtitle: "// roommate finder & household hub",
@@ -85,10 +112,15 @@ interface ProjectCardProps {
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => (
-  <div className="proj-card">
+  <div className={`proj-card ${project.featured ? "featured" : ""}`}>
     <div className={`proj-banner ${project.bannerClass}`}>
       <div className="proj-banner-grid"></div>
-      <div className="proj-banner-glyph">{project.icon}</div>
+      {project.image ? (
+        <img className="proj-banner-img" src={project.image} alt="" />
+      ) : (
+        <div className="proj-banner-glyph">{project.icon}</div>
+      )}
+      {project.featured && <div className="badge-featured">★ FEATURED</div>}
       <div className={`proj-status-badge ${project.badgeClass}`}>
         {project.badgeText}
       </div>
@@ -130,11 +162,13 @@ export default function Projects() {
     <section id="projects">
       <RevealOnScroll>
         <div className="sh">
-          <div className="sh-label">// portfolio</div>
-          <h2 className="sh-title">Featured Projects</h2>
+          <div className="sh-label"><span className="sh-num">02</span> Selected work</div>
+          <h2 className="sh-title">
+            Things I&apos;ve <em>built</em>
+          </h2>
           <p className="sh-sub">
-            Real applications built with purpose — from peer collaboration to
-            agri-tech commerce.
+            Real applications built with purpose — from race-safe ride pooling
+            to peer collaboration and agri-tech commerce.
           </p>
         </div>
       </RevealOnScroll>
