@@ -72,8 +72,10 @@ export default function Contact() {
     <section id="contact">
       <RevealOnScroll>
         <div className="sh">
-          <div className="sh-label">// lets_talk</div>
-          <h2 className="sh-title">Get In Touch</h2>
+          <div className="sh-label"><span className="sh-num">04</span> Contact</div>
+          <h2 className="sh-title">
+            Let&apos;s <em>talk</em>.
+          </h2>
           <p className="sh-sub">
             Open to full-time roles, internships, and interesting project
             conversations.

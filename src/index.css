@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..900;1,9..144,400..900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
 
 /* ============================================
    CSS CUSTOM PROPERTIES — THEME SYSTEM
@@ -6,85 +6,6 @@
 :root {
   --ease: cubic-bezier(0.4, 0, 0.2, 1);
   --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-[data-theme="dark"] {
-  --bg: #050a08;
-  --bg2: #080f0c;
-  --bg3: #0c1610;
-  --surf: #101a15;
-  --surf2: #162219;
-  --surf3: #1c2d22;
-  --acc: #00e396;
-  --acc2: #00c37a;
-  --acc3: #009a5f;
-  --acc-glow: rgba(0, 227, 150, 0.18);
-  --acc-soft: rgba(0, 227, 150, 0.08);
-  --acc-hair: rgba(0, 227, 150, 0.14);
-  --text: #edf7f2;
-  --text2: #7fa896;
-  --text3: #3d6654;
-  --border: rgba(0, 227, 150, 0.1);
-  --border2: rgba(0, 227, 150, 0.2);
-  --border3: rgba(0, 227, 150, 0.05);
-  /* skill card colors — non-green palette */
-  --c1: #1a1228;
-  --c1b: #7c6fcd;
-  --c1t: #beb8f4;
-  --c2: #0f1f2a;
-  --c2b: #3b9ec9;
-  --c2t: #93d6f0;
-  --c3: #201410;
-  --c3b: #e07540;
-  --c3t: #f5bb96;
-  --c4: #0d1f1a;
-  --c4b: #2dab80;
-  --c4t: #8ee5c5;
-  --c5: #1e1020;
-  --c5b: #c063d0;
-  --c5t: #eaa8f4;
-  --c6: #1a1a10;
-  --c6b: #c4b840;
-  --c6t: #efe48e;
-}
-
-[data-theme="light"] {
-  --bg: #f2faf6;
-  --bg2: #e8f5ee;
-  --bg3: #ddf0e7;
-  --surf: #ffffff;
-  --surf2: #f7fdf9;
-  --surf3: #edf8f2;
-  --acc: #00965c;
-  --acc2: #007a4a;
-  --acc3: #005e38;
-  --acc-glow: rgba(0, 150, 92, 0.15);
-  --acc-soft: rgba(0, 150, 92, 0.07);
-  --acc-hair: rgba(0, 150, 92, 0.12);
-  --text: #081a10;
-  --text2: #3a6b50;
-  --text3: #8abaaa;
-  --border: rgba(0, 150, 92, 0.12);
-  --border2: rgba(0, 150, 92, 0.25);
-  --border3: rgba(0, 150, 92, 0.06);
-  --c1: #f0eef9;
-  --c1b: #6457b8;
-  --c1t: #3d3480;
-  --c2: #eaf4fa;
-  --c2b: #2580a8;
-  --c2t: #124e6a;
-  --c3: #faf0ea;
-  --c3b: #c25a22;
-  --c3t: #7a3410;
-  --c4: #e8f5ef;
-  --c4b: #1a8a60;
-  --c4t: #0a5038;
-  --c5: #f7eefa;
-  --c5b: #a040b8;
-  --c5t: #6a2078;
-  --c6: #f6f4e4;
-  --c6b: #a0940c;
-  --c6t: #685e04;
 }
 
 /* ============================================
@@ -103,7 +24,7 @@ html {
 }
 
 body {
-  font-family: "Times New Roman", serif;
+  font-family: var(--font-mono);
   background: var(--bg);
   color: var(--text);
   overflow-x: hidden;
@@ -177,7 +98,7 @@ nav {
 }
 
 .nav-logo {
-  font-family: "Times New Roman", serif;
+  font-family: var(--font-mono);
   font-size: 16px;
   font-weight: 500;
   color: var(--acc);
@@ -339,7 +260,7 @@ section {
 }
 
 .sh-label {
-  font-family: "Times New Roman", serif;
+  font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 3px;
   text-transform: uppercase;
@@ -349,7 +270,7 @@ section {
 }
 
 .sh-title {
-  font-family: "Times New Roman", serif;
+  font-family: var(--font-mono);
   font-size: clamp(30px, 5vw, 52px);
   font-weight: 800;
   letter-spacing: -2.5px;
@@ -409,63 +330,6 @@ section {
   overflow: hidden;
 }
 
-.hero-orb {
-  position: absolute;
-  border-radius: 50%;
-  pointer-events: none;
-  animation: float-orb 10s ease-in-out infinite alternate;
-}
-.hero-orb-1 {
-  width: 420px;
-  height: 420px;
-  top: -100px;
-  right: -80px;
-  background: radial-gradient(
-    ellipse,
-    rgba(0, 227, 150, 0.07) 0%,
-    transparent 70%
-  );
-  animation-duration: 13s;
-}
-.hero-orb-2 {
-  width: 300px;
-  height: 300px;
-  bottom: 60px;
-  left: -60px;
-  background: radial-gradient(
-    ellipse,
-    rgba(0, 195, 122, 0.05) 0%,
-    transparent 70%
-  );
-  animation-duration: 9s;
-  animation-direction: alternate-reverse;
-}
-
-@keyframes float-orb {
-  0% {
-    transform: translate(0, 0) scale(1);
-  }
-  100% {
-    transform: translate(20px, -30px) scale(1.05);
-  }
-}
-
-.hero-available {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  background: var(--acc-soft);
-  border: 1px solid var(--acc-hair);
-  border-radius: 100px;
-  padding: 6px 16px 6px 10px;
-  font-family: "Times New Roman", serif;
-  font-size: 12px;
-  color: var(--acc);
-  width: fit-content;
-  margin-bottom: 32px;
-  animation: fadeup 0.7s 0.1s both;
-}
-
 .avail-dot {
   width: 8px;
   height: 8px;
@@ -475,7 +339,7 @@ section {
 }
 
 .hero-name {
-  font-family: "Times New Roman", serif;
+  font-family: var(--font-mono);
   font-size: clamp(50px, 10.5vw, 132px);
   font-weight: 800;
   line-height: 1;
@@ -492,7 +356,7 @@ section {
 }
 
 .hero-role {
-  font-family: "Times New Roman", serif;
+  font-family: var(--font-mono);
   font-size: clamp(14px, 2.2vw, 20px);
   color: var(--text2);
   margin-top: 24px;
@@ -574,31 +438,6 @@ section {
   border-color: var(--acc);
   color: var(--acc);
   background: var(--acc-soft);
-}
-
-.hero-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 48px;
-  padding-top: 40px;
-  border-top: 1px solid var(--border);
-  animation: fadeup 0.7s 0.5s both;
-}
-
-.hero-chip {
-  font-family: "Times New Roman", serif;
-  font-size: 12px;
-  color: var(--text3);
-  background: var(--surf);
-  border: 1px solid var(--border);
-  padding: 6px 14px;
-  border-radius: 8px;
-  transition: all 0.2s;
-}
-.hero-chip:hover {
-  color: var(--acc);
-  border-color: var(--border2);
 }
 
 @keyframes fadeup {
@@ -772,7 +611,7 @@ section {
 .sk-name {
   font-size: 13px;
   font-weight: 600;
-  font-family: "Times New Roman", serif;
+  font-family: var(--font-mono);
 }
 .v1 .sk-name {
   color: var(--c1t);
@@ -794,7 +633,7 @@ section {
 }
 
 .sk-cat {
-  font-family: "Times New Roman", serif;
+  font-family: var(--font-mono);
   font-size: 10px;
   margin-top: 2px;
   opacity: 0.65;
@@ -897,7 +736,7 @@ section {
   position: absolute;
   top: 14px;
   right: 14px;
-  font-family: "Times New Roman", serif;
+  font-family: var(--font-mono);
   font-size: 10px;
   font-weight: 500;
   padding: 4px 10px;
@@ -928,7 +767,7 @@ section {
 }
 
 .proj-title {
-  font-family: "Times New Roman", serif;
+  font-family: var(--font-mono);
   font-size: 22px;
   font-weight: 700;
   letter-spacing: -1px;
@@ -937,7 +776,7 @@ section {
 }
 
 .proj-subtitle {
-  font-family: "Times New Roman", serif;
+  font-family: var(--font-mono);
   font-size: 11px;
   color: var(--acc);
   margin-bottom: 14px;
@@ -973,7 +812,7 @@ section {
   border-top: 1px solid var(--border);
 }
 .proj-tech {
-  font-family: "Times New Roman", serif;
+  font-family: var(--font-mono);
   font-size: 11px;
   color: var(--text3);
   background: var(--surf2);
@@ -1051,7 +890,7 @@ section {
   padding: 16px;
 }
 .fact-label {
-  font-family: "Times New Roman", serif;
+  font-family: var(--font-mono);
   font-size: 10px;
   color: var(--text3);
   letter-spacing: 1.5px;
@@ -1073,7 +912,7 @@ section {
 }
 
 .edu-block-label {
-  font-family: "Times New Roman", serif;
+  font-family: var(--font-mono);
   font-size: 10px;
   color: var(--acc);
   letter-spacing: 2px;
@@ -1103,20 +942,20 @@ section {
   color: var(--text);
 }
 .edu-school {
-  font-family: "Times New Roman", serif;
+  font-family: var(--font-mono);
   font-size: 11px;
   color: var(--acc);
   margin-top: 4px;
 }
 .edu-year {
-  font-family: "Times New Roman", serif;
+  font-family: var(--font-mono);
   font-size: 11px;
   color: var(--text3);
   white-space: nowrap;
 }
 .edu-gpa {
   display: inline-block;
-  font-family: "Times New Roman", serif;
+  font-family: var(--font-mono);
   font-size: 11px;
   color: var(--acc);
   background: var(--acc-soft);
@@ -1226,7 +1065,7 @@ section {
   flex-shrink: 0;
 }
 .c-link-label {
-  font-family: "Times New Roman", serif;
+  font-family: var(--font-mono);
   font-size: 10px;
   color: var(--text3);
   letter-spacing: 1.5px;
@@ -1257,7 +1096,7 @@ section {
   padding: 32px;
 }
 .cform-label-row {
-  font-family: "Times New Roman", serif;
+  font-family: var(--font-mono);
   font-size: 10px;
   color: var(--acc);
   letter-spacing: 2px;
@@ -1270,7 +1109,7 @@ section {
 .fl {
   display: block;
   font-size: 12px;
-  font-family: "Times New Roman", serif;
+  font-family: var(--font-mono);
   color: var(--text3);
   letter-spacing: 0.5px;
   margin-bottom: 8px;
@@ -1284,7 +1123,7 @@ section {
   padding: 12px 16px;
   font-size: 14px;
   color: var(--text);
-  font-family: "Times New Roman", serif;
+  font-family: var(--font-mono);
   outline: none;
   transition: border-color 0.2s;
   appearance: none;
@@ -1307,7 +1146,7 @@ section {
   border-radius: 10px;
   font-size: 15px;
   font-weight: 700;
-  font-family: "Times New Roman", serif;
+  font-family: var(--font-mono);
   letter-spacing: 0.3px;
   transition: all 0.2s var(--ease);
   cursor: pointer;
@@ -1318,7 +1157,7 @@ section {
 }
 .fmsg {
   margin-top: 12px;
-  font-family: "Times New Roman", serif;
+  font-family: var(--font-mono);
   font-size: 12px;
   text-align: center;
   min-height: 18px;
@@ -1346,7 +1185,7 @@ footer {
 }
 
 .footer-logo {
-  font-family: "Times New Roman", serif;
+  font-family: var(--font-mono);
   font-size: 16px;
   color: var(--acc);
   font-weight: 500;
@@ -1400,12 +1239,6 @@ footer {
   }
   .hamburger {
     display: flex;
-  }
-  .hero-name {
-    letter-spacing: -3px;
-  }
-  .hero-chips {
-    display: none;
   }
   .about-facts {
     grid-template-columns: 1fr;

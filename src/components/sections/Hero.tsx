@@ -2,15 +2,22 @@ import { useEffect, useState, useRef } from "react";
 import RevealOnScroll from "../RevealOnScroll";
 
 const roles = [
-  "Backend Engineer",
-  "Full-Stack Developer",
-  "MERN Stack Developer",
-  "Go & Python Programmer",
-  "Competitive Programmer",
+  "backend engineer",
+  "full-stack developer",
+  "MERN stack developer",
+  "Go & Python programmer",
+  "competitive programmer",
+];
+
+const stats = [
+  { value: "04", label: "Shipped projects" },
+  { value: "3.25", label: "CGPA · JnU CSE" },
+  { value: "5.00", label: "HSC GPA" },
 ];
 
 export default function Hero() {
   const [typedText, setTypedText] = useState("");
+  const [photoOk, setPhotoOk] = useState(true);
   const typeIndexRef = useRef(0);
   const roleIndexRef = useRef(0);
   const isDeletingRef = useRef(false);
@@ -24,23 +31,23 @@ export default function Hero() {
         if (typeIndexRef.current < currentRole.length) {
           typeIndexRef.current++;
           setTypedText(currentRole.slice(0, typeIndexRef.current));
-          timeoutRef.current = setTimeout(typeLoop, 100);
+          timeoutRef.current = setTimeout(typeLoop, 90);
         } else {
           timeoutRef.current = setTimeout(() => {
             isDeletingRef.current = true;
             typeLoop();
-          }, 3000);
+          }, 2600);
         }
       } else {
         if (typeIndexRef.current > 0) {
           typeIndexRef.current--;
           setTypedText(currentRole.slice(0, typeIndexRef.current));
-          timeoutRef.current = setTimeout(typeLoop, 80);
+          timeoutRef.current = setTimeout(typeLoop, 45);
         } else {
           isDeletingRef.current = false;
           roleIndexRef.current = (roleIndexRef.current + 1) % roles.length;
           typeIndexRef.current = 0;
-          timeoutRef.current = setTimeout(typeLoop, 500);
+          timeoutRef.current = setTimeout(typeLoop, 400);
         }
       }
     };
@@ -54,77 +61,121 @@ export default function Hero() {
 
   return (
     <section id="hero">
-      <div className="hero-orb hero-orb-1"></div>
-      <div className="hero-orb hero-orb-2"></div>
+      <div className="hero-copy">
+        <RevealOnScroll delay={0.1}>
+          <div className="hero-kicker">
+            <span className="avail-dot"></span>
+            Available for work
+            <span className="kicker-sep">/</span>
+            Dhaka, Bangladesh
+          </div>
+        </RevealOnScroll>
 
-      <RevealOnScroll delay={0.1}>
-        <div className="hero-available">
-          <div className="avail-dot"></div>
-          Available for opportunities
-        </div>
-      </RevealOnScroll>
+        <RevealOnScroll delay={0.18}>
+          <h1 className="hero-name">
+            <span className="hn-1">Khandaker</span>
+            <span className="hn-2">Rafiul</span>
+            <span className="hn-3">Islam</span>
+          </h1>
+        </RevealOnScroll>
 
-      <RevealOnScroll delay={0.18}>
-        <h1 className="hero-name">
-          Khandaker
-          <br />
-          <em>Rafiul</em>
-          <br />
-          Islam
-        </h1>
-      </RevealOnScroll>
+        <RevealOnScroll delay={0.26}>
+          <div className="hero-role">
+            <span className="role-prefix">currently a</span>
+            <span className="role-typed">{typedText}</span>
+            <span className="typing-cursor"></span>
+          </div>
+        </RevealOnScroll>
 
-      <RevealOnScroll delay={0.26}>
-        <div className="hero-role">
-          <span id="typedText">{typedText}</span>
-          <span className="typing-cursor"></span>
-        </div>
-      </RevealOnScroll>
+        <RevealOnScroll delay={0.34}>
+          <p className="hero-desc">
+            Aspiring software engineer focused on backend development and
+            scalable systems. I work across the MERN stack, Go and Python, and I
+            care most about the <em>unglamorous, important</em> parts — data
+            models, concurrency and correctness.
+          </p>
+        </RevealOnScroll>
 
-      <RevealOnScroll delay={0.34}>
-        <p className="hero-desc">
-          Aspiring Software Engineer focused on backend development and scalable
-          systems. Proficient in the MERN stack, Go, and Python — passionate
-          about solving complex problems through efficient algorithms.
-        </p>
-      </RevealOnScroll>
+        <RevealOnScroll delay={0.42}>
+          <div className="hero-ctas">
+            <a
+              className="btn-p"
+              href="mailto:rafiul.islam.khandaker@gmail.com?subject=Portfolio%20Inquiry&body=Hi%20Rafiul%2C"
+            >
+              Get in touch <span aria-hidden>→</span>
+            </a>
+            <a
+              className="btn-o"
+              href="https://github.com/rafi0112"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              GitHub
+            </a>
+            <a
+              className="btn-o"
+              href="https://www.linkedin.com/in/khandaker-rafiul-islam-6b80882b2/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              LinkedIn
+            </a>
+          </div>
+        </RevealOnScroll>
 
-      <RevealOnScroll delay={0.42}>
-        <div className="hero-ctas">
-          <a
-            className="btn-p"
-            href="mailto:rafiul.islam.khandaker@gmail.com?subject=Portfolio%20Inquiry&body=Hi%20Rafiul%2C"
-          >
-            ✉ Get in Touch
-          </a>
-          <a
-            className="btn-o"
-            href="https://github.com/rafi0112"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            ⌥ GitHub
-          </a>
-          <a
-            className="btn-o"
-            href="https://www.linkedin.com/in/khandaker-rafiul-islam-6b80882b2/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            ↗ LinkedIn
-          </a>
-        </div>
-      </RevealOnScroll>
+        <RevealOnScroll delay={0.5}>
+          <dl className="hero-stats">
+            {stats.map((s) => (
+              <div key={s.label} className="stat">
+                <dt>{s.value}</dt>
+                <dd>{s.label}</dd>
+              </div>
+            ))}
+          </dl>
+        </RevealOnScroll>
+      </div>
 
-      <RevealOnScroll delay={0.5}>
-        <div className="hero-chips">
-          <span className="hero-chip">Dhaka, Bangladesh</span>
-          <span className="hero-chip">MERN Stack</span>
-          <span className="hero-chip">Go · Python · C++</span>
-          <span className="hero-chip">LeetCode · Codeforces</span>
-          <span className="hero-chip">CGPA 3.25 / 4.00</span>
-          <span className="hero-chip">Open to Full-time</span>
-        </div>
+      <RevealOnScroll delay={0.3}>
+        <figure className="portrait">
+          <div className="portrait-block" aria-hidden></div>
+          <div className="portrait-photo">
+            {photoOk ? (
+              <img
+                src="/profile.png"
+                alt="Khandaker Rafiul Islam"
+                onError={() => setPhotoOk(false)}
+              />
+            ) : (
+              <span className="photo-fallback">KR</span>
+            )}
+          </div>
+          <span className="portrait-tape" aria-hidden></span>
+
+          <svg className="stamp" viewBox="0 0 120 120" aria-hidden>
+            <defs>
+              <path
+                id="stamp-circle"
+                d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"
+              />
+            </defs>
+            <circle cx="60" cy="60" r="58" className="stamp-bg" />
+            <text className="stamp-text">
+              <textPath href="#stamp-circle">
+                OPEN TO WORK • BACKEND • FULL-STACK •
+              </textPath>
+            </text>
+            <text x="60" y="68" textAnchor="middle" className="stamp-star">
+              ★
+            </text>
+          </svg>
+
+          <div className="sticker">
+            <span className="sticker-label">Now shipping</span>
+            Oi Tesla Pool
+          </div>
+
+          <figcaption>Fig. 01 — the engineer, in his interview suit</figcaption>
+        </figure>
       </RevealOnScroll>
     </section>
   );

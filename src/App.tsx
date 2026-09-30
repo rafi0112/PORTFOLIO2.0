@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Navigation from "./components/Navigation";
 import ScrollProgress from "./components/ScrollProgress";
-import StarsBackground from "./components/StarsBackground";
 import Hero from "./components/sections/Hero";
 import Skills from "./components/sections/Skills";
 import Projects from "./components/sections/Projects";
@@ -10,7 +9,7 @@ import Contact from "./components/sections/Contact";
 import Footer from "./components/Footer";
 
 export default function App() {
-  const [theme, setTheme] = useState<"dark" | "light">("dark");
+  const [theme, setTheme] = useState<"dark" | "light">("light");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeNav, setActiveNav] = useState("hero");
 
@@ -51,7 +50,6 @@ export default function App() {
 
   return (
     <>
-      <StarsBackground isDark={theme === "dark"} />
       <ScrollProgress />
       <Navigation
         theme={theme}

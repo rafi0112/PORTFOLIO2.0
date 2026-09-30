@@ -5,8 +5,8 @@ export default function About() {
     <section id="about">
       <RevealOnScroll>
         <div className="sh">
-          <div className="sh-label">// about_me</div>
-          <h2 className="sh-title">Background</h2>
+          <div className="sh-label"><span className="sh-num">03</span> About</div>
+          <h2 className="sh-title">A bit of <em>background</em></h2>
         </div>
       </RevealOnScroll>
 
