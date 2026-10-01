@@ -115,6 +115,18 @@
     font-size: 19px;
   }
 
+  /* Command palette: sit at the top and let the list fill whatever space the
+     keyboard leaves, instead of a fixed height that ends up underneath it. */
+  .cmdk-overlay {
+    padding: 12px;
+  }
+  .cmdk-list {
+    max-height: none;
+  }
+  .cmdk-foot {
+    display: none; /* keyboard hints are noise on touch screens */
+  }
+
   /* Keep the theme menu on screen. */
   .theme-menu {
     position: fixed;

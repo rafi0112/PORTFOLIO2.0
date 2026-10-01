@@ -28,6 +28,7 @@ export default function CommandPalette({ open, onClose, gotoSection, pickTheme, 
   const [copied, setCopied] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
   const returnFocus = useRef<HTMLElement | null>(null);
 
   const commands = useMemo<Command[]>(() => {
@@ -106,6 +107,27 @@ export default function CommandPalette({ open, onClose, gotoSection, pickTheme, 
     };
   }, [open]);
 
+  // Fit the dialog into the part of the screen the on-screen keyboard leaves
+  // visible. Android Chrome also shrinks the page (see the viewport meta tag);
+  // iOS Safari doesn't, so read the visual viewport directly.
+  useEffect(() => {
+    const vv = window.visualViewport;
+    if (!open || !vv) return;
+    const fit = () => {
+      const el = overlayRef.current;
+      if (!el) return;
+      el.style.setProperty("--vv-top", `${vv.offsetTop}px`);
+      el.style.setProperty("--vv-h", `${vv.height}px`);
+    };
+    fit();
+    vv.addEventListener("resize", fit);
+    vv.addEventListener("scroll", fit);
+    return () => {
+      vv.removeEventListener("resize", fit);
+      vv.removeEventListener("scroll", fit);
+    };
+  }, [open]);
+
   useEffect(() => setActive(0), [query]);
 
   useEffect(() => {
@@ -141,7 +163,9 @@ export default function CommandPalette({ open, onClose, gotoSection, pickTheme, 
 
   let lastGroup = "";
   return (
-    <div className="cmdk-overlay" onPointerDown={(e) => e.target === e.currentTarget && onClose()}>
+    // data-lenis-prevent: while the page is locked, Lenis cancels every wheel and
+    // touch scroll it sees — this opts the palette out so its list can scroll.
+    <div ref={overlayRef} className="cmdk-overlay" data-lenis-prevent onPointerDown={(e) => e.target === e.currentTarget && onClose()}>
       <div className="cmdk" role="dialog" aria-modal="true" aria-label="Command palette" onKeyDown={onKey}>
         <input
           ref={inputRef}
