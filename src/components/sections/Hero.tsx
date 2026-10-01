@@ -183,7 +183,7 @@ export default function Hero() {
             Oi Tesla Pool
           </div>
 
-          <figcaption>Fig. 01 — the engineer, in his interview suit</figcaption>
+          {/* <figcaption>Fig. 01 — the engineer, in his interview suit</figcaption> */}
         </figure>
       </RevealOnScroll>
     </section>
