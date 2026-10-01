@@ -1,0 +1,134 @@
+/* ============================================
+   RESPONSIVE — loaded last so these win.
+============================================ */
+
+/* Grid items default to min-width: auto, so one unbreakable string (an email
+   address) can push a whole column wider than a phone screen. */
+.reveal,
+.contact-grid > *,
+.about-grid > *,
+.projects-grid > *,
+.c-link > div {
+  min-width: 0;
+}
+.c-link-val,
+.fact-val,
+.proj-subtitle {
+  overflow-wrap: anywhere;
+}
+
+/* "Show all details" toggle for long project cards (phones only). */
+.proj-more {
+  display: none;
+  margin-top: 4px;
+  padding: 6px 0;
+  border: none;
+  background: none;
+  color: var(--acc);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* ---------- Laptop and below ---------- */
+/* The hero copy column gets narrow before the layout stacks, so the four
+   buttons can't share one row: primary full width, the rest one even row. */
+@media (max-width: 1200px) {
+  .hero-ctas {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    max-width: 460px;
+  }
+  .hero-ctas .btn-p {
+    grid-column: 1 / -1;
+    justify-content: center;
+  }
+  .hero-ctas .btn-o {
+    justify-content: center;
+    padding-left: 8px;
+    padding-right: 8px;
+    white-space: nowrap;
+  }
+}
+
+/* ---------- Tablet ---------- */
+@media (max-width: 1024px) and (min-width: 701px) {
+  .nav-center {
+    gap: 0;
+  }
+  .nav-link {
+    padding: 8px 10px;
+  }
+  .nav-right {
+    gap: 8px;
+  }
+}
+
+/* ---------- Phones ---------- */
+@media (max-width: 700px) {
+  .hero-kicker {
+    flex-wrap: wrap;
+    row-gap: 6px;
+    font-size: 11px;
+    letter-spacing: 1.1px;
+  }
+  .kicker-part {
+    white-space: nowrap;
+  }
+
+  .hero-stats {
+    margin-top: 36px;
+  }
+  .stat {
+    padding-right: 10px;
+    margin-right: 10px;
+  }
+  .stat dd {
+    font-size: 10px;
+    letter-spacing: 0.8px;
+  }
+
+  /* Education: year on top, degree gets the full width. */
+  .edu-item {
+    flex-direction: column;
+    gap: 6px;
+  }
+  .edu-year {
+    order: -1;
+  }
+  .edu-gpa {
+    white-space: nowrap;
+  }
+
+  .proj-points.collapsed li:nth-child(n + 4) {
+    display: none;
+  }
+  .proj-more {
+    display: inline-block;
+  }
+
+  .contact-intro {
+    font-size: 19px;
+  }
+
+  /* Keep the theme menu on screen. */
+  .theme-menu {
+    position: fixed;
+    top: 72px;
+    right: 12px;
+    width: min(260px, calc(100vw - 24px));
+  }
+}
+
+@media (max-width: 360px) {
+  .hero-ctas .btn-o {
+    font-size: 12px;
+  }
+  .stat dt {
+    font-size: 26px;
+  }
+}

@@ -65,9 +65,9 @@ export default function Hero() {
         <RevealOnScroll delay={0.1}>
           <div className="hero-kicker">
             <span className="avail-dot"></span>
-            Available for work
+            <span className="kicker-part">Available for work</span>
             <span className="kicker-sep">/</span>
-            Dhaka, Bangladesh
+            <span className="kicker-part">Dhaka, Bangladesh</span>
           </div>
         </RevealOnScroll>
 
@@ -121,6 +121,13 @@ export default function Hero() {
               rel="noopener noreferrer"
             >
               LinkedIn
+            </a>
+            <a
+              className="btn-o btn-resume"
+              href="/resume.pdf"
+              download="Khandaker_Rafiul_Islam_Resume.pdf"
+            >
+              Resume <span aria-hidden>↓</span>
             </a>
           </div>
         </RevealOnScroll>

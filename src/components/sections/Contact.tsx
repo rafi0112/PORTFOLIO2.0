@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import RevealOnScroll from "../RevealOnScroll";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
@@ -11,6 +11,7 @@ export default function Contact() {
   });
   const [formMessage, setFormMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const submitRef = useRef<HTMLButtonElement>(null);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -56,6 +57,15 @@ export default function Contact() {
       }
 
       setFormMessage("// Message sent! I'll reply within 24 hours.");
+      // Pip the bird flies down, picks up the letter and carries it off.
+      const r = submitRef.current?.getBoundingClientRect();
+      if (r) {
+        window.dispatchEvent(
+          new CustomEvent("bird:deliver", {
+            detail: { x: r.left + r.width / 2, y: r.top },
+          }),
+        );
+      }
       setFormData({ name: "", email: "", message: "" });
     } catch (error) {
       const msg =
@@ -179,6 +189,7 @@ export default function Contact() {
               ></textarea>
             </div>
             <button
+              ref={submitRef}
               className="fsub"
               onClick={handleForm}
               disabled={isSubmitting}

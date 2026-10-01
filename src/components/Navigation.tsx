@@ -1,6 +1,11 @@
+import ThemePicker from "./ThemePicker";
+
+const isMac = typeof navigator !== "undefined" && /Mac|iPhone|iPad/.test(navigator.platform);
+
 interface NavigationProps {
-  theme: "dark" | "light";
-  toggleTheme: () => void;
+  themeId: string;
+  pickTheme: (id: string, origin: { x: number; y: number }) => void;
+  openPalette: () => void;
   gotoSection: (id: string) => void;
   activeNav: string;
   mobileMenuOpen: boolean;
@@ -8,8 +13,9 @@ interface NavigationProps {
 }
 
 export default function Navigation({
-  theme,
-  toggleTheme,
+  themeId,
+  pickTheme,
+  openPalette,
   gotoSection,
   activeNav,
   mobileMenuOpen,
@@ -45,12 +51,13 @@ export default function Navigation({
 
         <div className="nav-right">
           <button
-            className="theme-toggle"
-            onClick={toggleTheme}
-            aria-label="Toggle theme"
+            className="cmdk-trigger"
+            onClick={openPalette}
+            aria-label="Open command palette"
           >
-            {theme === "dark" ? "☼" : "☾"}
+            Search <kbd>{isMac ? "⌘K" : "Ctrl K"}</kbd>
           </button>
+          <ThemePicker themeId={themeId} onPick={pickTheme} />
           <button className="nav-hire" onClick={() => gotoSection("contact")}>
             Hire Me →
           </button>
@@ -83,6 +90,15 @@ export default function Navigation({
             {item.label}
           </button>
         ))}
+        <button
+          className="nav-link"
+          onClick={() => {
+            setMobileMenuOpen(false);
+            openPalette();
+          }}
+        >
+          Search…
+        </button>
       </div>
     </>
   );

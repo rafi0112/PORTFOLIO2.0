@@ -88,14 +88,6 @@ nav {
     border-color 0.4s var(--ease);
 }
 
-[data-theme="dark"] nav {
-  background: rgba(5, 10, 8, 0.82);
-  backdrop-filter: blur(24px);
-}
-[data-theme="light"] nav {
-  background: rgba(242, 250, 246, 0.88);
-  backdrop-filter: blur(24px);
-}
 
 .nav-logo {
   font-family: var(--font-mono);
@@ -157,25 +149,6 @@ nav {
   display: flex;
   align-items: center;
   gap: 10px;
-}
-
-.theme-toggle {
-  width: 38px;
-  height: 38px;
-  border-radius: 10px;
-  border: 1px solid var(--border2);
-  background: var(--acc-soft);
-  color: var(--acc);
-  font-size: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.25s;
-}
-
-.theme-toggle:hover {
-  transform: rotate(15deg) scale(1.08);
-  background: var(--acc-hair);
 }
 
 .nav-hire {

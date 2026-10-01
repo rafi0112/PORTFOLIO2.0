@@ -1,10 +1,22 @@
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="light" data-mode="light">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Khandaker Rafiul Islam</title>
+    <script>
+      // Apply the saved theme before first paint so there is no flash.
+      (function () {
+        var dark = { dark: 1, navy: 1, emerald: 1 };
+        var ids = ["light", "dark", "sage", "terracotta", "navy", "emerald", "blush"];
+        var t;
+        try { t = localStorage.getItem("rafi-theme"); } catch (e) {}
+        if (ids.indexOf(t) < 0) t = "light";
+        document.documentElement.setAttribute("data-theme", t);
+        document.documentElement.setAttribute("data-mode", dark[t] ? "dark" : "light");
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

@@ -72,10 +72,7 @@ body::before {
   pointer-events: none;
   opacity: var(--grain-opacity);
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.1  0 0 0 0 0.09  0 0 0 0 0.08  0 0 0 .35 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
-  mix-blend-mode: multiply;
-}
-[data-theme="dark"] body::before {
-  mix-blend-mode: screen;
+  mix-blend-mode: var(--grain-blend, multiply);
 }
 ::selection {
   background: var(--acc3);
@@ -97,11 +94,9 @@ nav {
   height: 68px;
   border-bottom: 1px solid var(--border);
 }
-[data-theme="light"] nav {
-  background: rgba(243, 238, 227, 0.88);
-}
-[data-theme="dark"] nav {
-  background: rgba(21, 19, 15, 0.88);
+nav {
+  background: var(--nav-bg);
+  backdrop-filter: blur(20px);
 }
 .nav-logo,
 .footer-logo {
@@ -141,18 +136,6 @@ nav {
   bottom: 2px;
   height: 2px;
   background: var(--acc);
-}
-.theme-toggle {
-  border-radius: 50%;
-  border: 1.5px solid var(--text);
-  background: transparent;
-  color: var(--text);
-  font-size: 17px;
-}
-.theme-toggle:hover {
-  background: var(--acc3);
-  color: #1a1714;
-  border-color: var(--acc3);
 }
 .nav-hire,
 .btn-p,
@@ -471,7 +454,7 @@ section {
   font-family: var(--font-mono);
   font-size: 9.6px;
   letter-spacing: 1.6px;
-  fill: #f3eee3;
+  fill: var(--on-acc2);
 }
 .stamp-star {
   font-size: 22px;
@@ -624,17 +607,18 @@ section {
   background-image: radial-gradient(rgba(26, 23, 20, 0.16) 1.2px, transparent 1.4px);
   background-size: 12px 12px;
 }
+/* Banners stay light in every theme so the dark N° label reads. */
 .proj-banner-1 {
-  background: #7fb8ad;
+  background: color-mix(in srgb, var(--acc2) 45%, #f3eee3);
 }
 .proj-banner-2 {
-  background: #c9b99a;
+  background: color-mix(in srgb, var(--acc) 22%, #e6dcc8);
 }
 .proj-banner-3 {
-  background: #e8b54a;
+  background: color-mix(in srgb, var(--acc3) 75%, #f3eee3);
 }
 .proj-banner-4 {
-  background: #efe3c8;
+  background: color-mix(in srgb, var(--acc) 10%, #f3eee3);
 }
 .proj-banner-glyph {
   font-size: 76px;
@@ -673,8 +657,8 @@ section {
   letter-spacing: 1px;
   padding: 4px 10px;
   border-radius: 999px;
-  color: #fbf8f1;
-  background: #d9442a;
+  color: var(--on-acc);
+  background: var(--acc);
   border: 1.5px solid #1a1714;
 }
 .proj-title {

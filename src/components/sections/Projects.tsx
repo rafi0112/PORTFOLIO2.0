@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import RevealOnScroll from "../RevealOnScroll";
 
 interface Project {
@@ -111,51 +111,70 @@ interface ProjectCardProps {
   project: Project;
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => (
-  <div className={`proj-card ${project.featured ? "featured" : ""}`}>
-    <div className={`proj-banner ${project.bannerClass}`}>
-      <div className="proj-banner-grid"></div>
-      {project.image ? (
-        <img className="proj-banner-img" src={project.image} alt="" />
-      ) : (
-        <div className="proj-banner-glyph">{project.icon}</div>
-      )}
-      {project.featured && <div className="badge-featured">★ FEATURED</div>}
-      <div className={`proj-status-badge ${project.badgeClass}`}>
-        {project.badgeText}
+// On phones, long cards show the first few points behind a toggle.
+const PREVIEW_POINTS = 3;
+
+const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
+  const [expanded, setExpanded] = useState(false);
+  // Hiding a single point behind a toggle isn't worth the extra tap.
+  const collapsible = project.points.length > PREVIEW_POINTS + 1;
+  return (
+    <div className={`proj-card ${project.featured ? "featured" : ""}`}>
+      <div className={`proj-banner ${project.bannerClass}`}>
+        <div className="proj-banner-grid"></div>
+        {project.image ? (
+          <img className="proj-banner-img" src={project.image} alt="" />
+        ) : (
+          <div className="proj-banner-glyph">{project.icon}</div>
+        )}
+        {project.featured && <div className="badge-featured">★ FEATURED</div>}
+        <div className={`proj-status-badge ${project.badgeClass}`}>
+          {project.badgeText}
+        </div>
       </div>
-    </div>
-    <div className="proj-body">
-      <div className="proj-title">{project.title}</div>
-      <div className="proj-subtitle">{project.subtitle}</div>
-      <ul className="proj-points">
-        {project.points.map((point, idx) => (
-          <li key={idx}>{point}</li>
-        ))}
-      </ul>
-      <div className="proj-techs">
-        {project.techs.map((tech, idx) => (
-          <span key={idx} className="proj-tech">
-            {tech}
-          </span>
-        ))}
-      </div>
-      <div className="proj-links">
-        {project.links.map((link, idx) => (
-          <a
-            key={idx}
-            className="proj-link"
-            href={link.url}
-            target="_blank"
-            rel="noopener noreferrer"
+      <div className="proj-body">
+        <div className="proj-title">{project.title}</div>
+        <div className="proj-subtitle">{project.subtitle}</div>
+        <ul className={`proj-points ${collapsible && !expanded ? "collapsed" : ""}`}>
+          {project.points.map((point, idx) => (
+            <li key={idx}>{point}</li>
+          ))}
+        </ul>
+        {collapsible && (
+          <button
+            className="proj-more"
+            aria-expanded={expanded}
+            onClick={() => setExpanded((e) => !e)}
           >
-            {link.label}
-          </a>
-        ))}
+            {expanded
+              ? "Show less ↑"
+              : `Show all ${project.points.length} details ↓`}
+          </button>
+        )}
+        <div className="proj-techs">
+          {project.techs.map((tech, idx) => (
+            <span key={idx} className="proj-tech">
+              {tech}
+            </span>
+          ))}
+        </div>
+        <div className="proj-links">
+          {project.links.map((link, idx) => (
+            <a
+              key={idx}
+              className="proj-link"
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default function Projects() {
   return (

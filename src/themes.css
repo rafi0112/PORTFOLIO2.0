@@ -1,0 +1,576 @@
+/* ============================================
+   EXTRA THEMES — inspired by luxury interior pairings.
+   Paper ("light") and Ink ("dark") live in editorial.css.
+============================================ */
+[data-theme="light"] {
+  --on-acc2: #f3eee3;
+}
+[data-theme="dark"] {
+  --on-acc2: #15130f;
+}
+
+[data-theme="sage"] {
+  --bg: #e7ebe1;
+  --bg2: #dde3d5;
+  --bg3: #d2d9c9;
+  --surf: #f4f6f0;
+  --surf2: #edf0e7;
+  --surf3: #e2e7da;
+  --ink: #1f2a22;
+  --text: #1f2a22;
+  --text2: #4a5a4e;
+  --text3: #717f74;
+  --acc: #8a6a2e;
+  --acc2: #4f6b55;
+  --acc3: #d4b062;
+  --on-acc: #f4f6f0;
+  --on-acc2: #f4f6f0;
+  --shadow: 6px 6px 0 var(--ink);
+  --grain-opacity: 0.32;
+}
+
+[data-theme="terracotta"] {
+  --bg: #f4e9df;
+  --bg2: #ecdfd2;
+  --bg3: #e2d2c2;
+  --surf: #fbf5ef;
+  --surf2: #f6ede4;
+  --surf3: #eee2d5;
+  --ink: #2b1d16;
+  --text: #2b1d16;
+  --text2: #5e4a3e;
+  --text3: #86705f;
+  --acc: #b04a26;
+  --acc2: #5f7356;
+  --acc3: #e0a458;
+  --on-acc: #fbf5ef;
+  --on-acc2: #fbf5ef;
+  --shadow: 6px 6px 0 var(--ink);
+  --grain-opacity: 0.35;
+}
+
+[data-theme="navy"] {
+  --bg: #0f1a2b;
+  --bg2: #132036;
+  --bg3: #182841;
+  --surf: #15233a;
+  --surf2: #1a2a45;
+  --surf3: #22344f;
+  --ink: #f2ead8;
+  --text: #f2ead8;
+  --text2: #b8c0cc;
+  --text3: #7f8a9b;
+  --acc: #d4a64a;
+  --acc2: #7fa3c6;
+  --acc3: #e8c766;
+  --on-acc: #0f1a2b;
+  --on-acc2: #0f1a2b;
+  --shadow: 6px 6px 0 var(--acc);
+  --grain-opacity: 0.16;
+}
+
+[data-theme="emerald"] {
+  --bg: #0e2420;
+  --bg2: #112a25;
+  --bg3: #15322c;
+  --surf: #133029;
+  --surf2: #17372f;
+  --surf3: #1e4239;
+  --ink: #eef0ea;
+  --text: #eef0ea;
+  --text2: #b3c2bb;
+  --text3: #7d928a;
+  --acc: #c9a96e;
+  --acc2: #7cc4a8;
+  --acc3: #e3cf9a;
+  --on-acc: #0e2420;
+  --on-acc2: #0e2420;
+  --shadow: 6px 6px 0 var(--acc);
+  --grain-opacity: 0.16;
+}
+
+[data-theme="blush"] {
+  --bg: #f6e8e4;
+  --bg2: #efddd8;
+  --bg3: #e6d0ca;
+  --surf: #fcf5f3;
+  --surf2: #f8ece8;
+  --surf3: #f0e0db;
+  --ink: #2a2627;
+  --text: #2a2627;
+  --text2: #5a5052;
+  --text3: #887b7e;
+  --acc: #a8434f;
+  --acc2: #3f3b3c;
+  --acc3: #eab2a8;
+  --on-acc: #fcf5f3;
+  --on-acc2: #fcf5f3;
+  --shadow: 6px 6px 0 var(--ink);
+  --grain-opacity: 0.32;
+}
+
+/* Tokens every theme derives the same way. */
+[data-theme] {
+  --acc-soft: color-mix(in srgb, var(--acc) 9%, transparent);
+  --acc-hair: color-mix(in srgb, var(--acc) 25%, transparent);
+  --border: color-mix(in srgb, var(--ink) 14%, transparent);
+  --border2: color-mix(in srgb, var(--ink) 32%, transparent);
+  --border3: color-mix(in srgb, var(--ink) 6%, transparent);
+  --nav-bg: color-mix(in srgb, var(--bg) 88%, transparent);
+  --grain-blend: multiply;
+}
+[data-mode="dark"] {
+  --acc-glow: rgba(0, 0, 0, 0.4);
+  --grain-blend: screen;
+  color-scheme: dark;
+}
+[data-mode="light"] {
+  --acc-glow: color-mix(in srgb, var(--ink) 12%, transparent);
+  color-scheme: light;
+}
+
+/* ============================================
+   THEME SWITCH — ink-spill circular reveal
+============================================ */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-new(root) {
+  z-index: 9999;
+}
+
+/* ============================================
+   AMBIENT BACKGROUND CANVAS
+============================================ */
+#ambient {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ============================================
+   THEME PICKER
+============================================ */
+.theme-picker {
+  position: relative;
+}
+.theme-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 38px;
+  padding: 0 12px 0 8px;
+  border-radius: 999px;
+  border: 1.5px solid var(--ink);
+  background: var(--surf);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: transform 0.15s var(--ease), box-shadow 0.15s var(--ease);
+}
+.theme-trigger:hover,
+.theme-trigger[aria-expanded="true"] {
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 var(--ink);
+}
+.swatch-dots {
+  display: inline-flex;
+}
+.swatch-dots i {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1.5px solid var(--ink);
+  margin-left: -5px;
+}
+.swatch-dots i:first-child {
+  margin-left: 0;
+}
+.theme-menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 10px);
+  width: 260px;
+  padding: 8px;
+  background: var(--surf);
+  border: 1.5px solid var(--ink);
+  box-shadow: var(--shadow);
+  border-radius: 14px;
+  z-index: 1100;
+  transform-origin: top right;
+  animation: menu-in 0.22s var(--spring);
+}
+@keyframes menu-in {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(-6px);
+  }
+}
+.theme-menu-title {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: var(--text3);
+  padding: 6px 10px 8px;
+}
+.theme-option {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 10px;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  text-align: left;
+}
+.theme-option:hover,
+.theme-option:focus-visible {
+  background: var(--surf3);
+  outline: none;
+}
+.theme-option .tick {
+  margin-left: auto;
+  color: var(--acc);
+  font-size: 14px;
+}
+.theme-option .mode {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text3);
+}
+.theme-option[aria-checked="true"] {
+  background: var(--acc-soft);
+}
+
+/* ============================================
+   COMMAND PALETTE
+============================================ */
+.cmdk-trigger {
+  height: 38px;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1.5px solid var(--border2);
+  background: transparent;
+  color: var(--text2);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.cmdk-trigger:hover {
+  border-color: var(--ink);
+  color: var(--text);
+}
+.cmdk-trigger kbd,
+.cmdk-foot kbd {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 1px 5px;
+  border: 1px solid var(--border2);
+  border-radius: 4px;
+  background: var(--surf2);
+}
+.cmdk-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  background: color-mix(in srgb, var(--bg) 55%, transparent);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 14vh 16px 16px;
+  animation: fade-in 0.15s ease-out;
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+.cmdk {
+  width: min(560px, 100%);
+  background: var(--surf);
+  border: 1.5px solid var(--ink);
+  box-shadow: var(--shadow);
+  border-radius: 16px;
+  overflow: hidden;
+  animation: menu-in 0.25s var(--spring);
+}
+.cmdk-input {
+  width: 100%;
+  border: none;
+  border-bottom: 1.5px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  padding: 18px 20px;
+  outline: none;
+}
+.cmdk-input::placeholder {
+  color: var(--text3);
+}
+.cmdk-list {
+  max-height: min(380px, 50vh);
+  overflow-y: auto;
+  padding: 8px;
+  overscroll-behavior: contain;
+}
+.cmdk-group {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: var(--text3);
+  padding: 10px 12px 6px;
+}
+.cmdk-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  color: var(--text);
+  font-size: 14.5px;
+  cursor: pointer;
+}
+.cmdk-item[aria-selected="true"] {
+  background: var(--acc);
+  color: var(--on-acc);
+}
+.cmdk-item .ic {
+  width: 22px;
+  text-align: center;
+  flex: none;
+}
+.cmdk-item .hint {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  opacity: 0.7;
+}
+.cmdk-empty {
+  padding: 26px 12px;
+  text-align: center;
+  color: var(--text3);
+  font-family: var(--font-serif);
+  font-style: italic;
+}
+.cmdk-foot {
+  display: flex;
+  gap: 16px;
+  padding: 10px 16px;
+  border-top: 1.5px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--text3);
+}
+
+/* ============================================
+   PIP THE BLUE TIT
+============================================ */
+#root {
+  position: relative;
+}
+.bird-layer {
+  position: absolute;
+  inset: 0;
+  overflow: clip;
+  pointer-events: none;
+  z-index: 900;
+}
+.bird {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 96px;
+  height: 78px;
+  margin: -56px 0 0 -48px; /* feet (viewBox 50,57) sit on the perch point */
+  pointer-events: auto;
+  cursor: pointer;
+  will-change: transform;
+  background: none;
+  border: none;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+.bird:focus-visible {
+  outline: 2px dashed var(--acc);
+  outline-offset: 4px;
+  border-radius: 8px;
+}
+.bird svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+/* Every moving part pivots around a joint, in viewBox units. */
+.bird .flip,
+.bird .wing,
+.bird .tail,
+.bird .head,
+.bird .legs,
+.bird .eye {
+  transform-box: view-box;
+}
+.bird .flip {
+  transform-origin: 50px 42px;
+}
+.bird .wing {
+  transform-origin: 52px 35px;
+}
+.bird .tail {
+  transform-origin: 37px 46px;
+}
+.bird .head {
+  transform-origin: 63px 34px;
+}
+.bird .legs {
+  transform-origin: 51px 51px;
+}
+.bird .eye {
+  transform-origin: 71.6px 27.6px;
+}
+.bird .shadow {
+  fill: var(--ink);
+  opacity: 0.14;
+}
+.bird .letter {
+  opacity: 0;
+}
+.bird .letter rect {
+  fill: #fbf8f1;
+}
+.bird .letter path,
+.bird .letter rect {
+  stroke: #1f2a3a;
+  stroke-width: 1.2;
+}
+.bird .letter .seal {
+  fill: #d9442a;
+  stroke: none;
+}
+.bird-bubble {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -100%);
+  white-space: nowrap;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 14px;
+  padding: 6px 12px;
+  background: var(--surf);
+  color: var(--text);
+  border: 1.5px solid var(--ink);
+  border-radius: 12px;
+  box-shadow: 2px 2px 0 var(--ink);
+  opacity: 0;
+  pointer-events: none;
+}
+.bird-note {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 18px;
+  color: var(--acc);
+  pointer-events: none;
+  font-family: var(--font-serif);
+}
+.bird.mini-bird {
+  width: 40px;
+  height: 32px;
+  margin: 0;
+  pointer-events: none;
+}
+@media (max-width: 760px) {
+  .bird {
+    width: 64px;
+    height: 52px;
+    margin: -37px 0 0 -32px;
+  }
+}
+
+/* ============================================
+   PROJECT CARD SPOTLIGHT + MAGNETIC
+============================================ */
+.proj-card {
+  position: relative;
+}
+.proj-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.3s var(--ease);
+  background: radial-gradient(
+    420px circle at var(--mx, 50%) var(--my, 50%),
+    color-mix(in srgb, var(--acc) 10%, transparent),
+    transparent 60%
+  );
+}
+.proj-card:hover::before {
+  opacity: 1;
+}
+/* Magnetic pull — GSAP tweens --tx/--ty; `translate` composes with the
+   existing hover `transform`, so the two never fight. */
+.btn-p,
+.btn-o,
+.nav-hire,
+.theme-trigger,
+.fsub {
+  --tx: 0px;
+  --ty: 0px;
+  translate: var(--tx) var(--ty);
+}
+
+/* Lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+
+@media (max-width: 900px) {
+  .cmdk-trigger {
+    display: none;
+  }
+  .theme-trigger .theme-name {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
