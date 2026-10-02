@@ -7,6 +7,7 @@ import Bird from "./components/Bird";
 import CommandPalette from "./components/CommandPalette";
 import Hero from "./components/sections/Hero";
 import Skills from "./components/sections/Skills";
+import Playground from "./components/sections/Playground";
 import Projects from "./components/sections/Projects";
 import About from "./components/sections/About";
 import Contact from "./components/sections/Contact";
@@ -91,7 +92,7 @@ export default function App() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["hero", "skills", "projects", "about", "contact"];
+      const sections = ["hero", "skills", "playground", "projects", "about", "contact"];
       let current = "hero";
 
       sections.forEach((id) => {
@@ -125,6 +126,7 @@ export default function App() {
       <div className="page">
         <Hero />
         <Skills />
+        <Playground />
         <Projects />
         <About />
         <Contact />

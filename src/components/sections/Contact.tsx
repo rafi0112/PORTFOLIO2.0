@@ -11,6 +11,7 @@ export default function Contact() {
   });
   const [formMessage, setFormMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [enqueued, setEnqueued] = useState(0);
   const submitRef = useRef<HTMLButtonElement>(null);
 
   const handleInputChange = (
@@ -57,6 +58,7 @@ export default function Contact() {
       }
 
       setFormMessage("// Message sent! I'll reply within 24 hours.");
+      setEnqueued((n) => n + 1);
       // Pip the bird flies down, picks up the letter and carries it off.
       const r = submitRef.current?.getBoundingClientRect();
       if (r) {
@@ -87,9 +89,44 @@ export default function Contact() {
             Let&apos;s <em>talk</em>.
           </h2>
           <p className="sh-sub">
-            Open to full-time roles, internships, and interesting project
-            conversations.
+            Your message is a job on my queue — and I drain it within 24 hours.
           </p>
+        </div>
+      </RevealOnScroll>
+
+      <RevealOnScroll delay={0.05}>
+        {/* How a message reaches me, drawn as a producer → queue → consumer. */}
+        <div className="mq" aria-label="Your message goes from this form into my inbox queue, and I reply within 24 hours.">
+          <div className="mq-node">
+            <b>producer</b>
+            <span>you · the form below</span>
+          </div>
+          <div className="mq-pipe" aria-hidden>
+            <i />
+          </div>
+          <div className="mq-queue">
+            <b>
+              inbox.queue <span>· durable</span>
+            </b>
+            {/* Re-keyed on each send so the new message animates in. */}
+            <div className={`mq-slots ${enqueued ? "has-new" : ""}`} key={enqueued} aria-hidden>
+              <i />
+              <i />
+              <i />
+              <i />
+              <i />
+            </div>
+          </div>
+          <div className="mq-pipe dashed" aria-hidden>
+            <i />
+          </div>
+          <div className="mq-node primary">
+            <b>consumer</b>
+            <span>rafi · reads every one</span>
+          </div>
+          <div className="mq-ack" aria-hidden>
+            <span>↺ ack · reply &lt; 24h</span>
+          </div>
         </div>
       </RevealOnScroll>
 

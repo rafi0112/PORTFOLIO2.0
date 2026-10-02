@@ -1,12 +1,90 @@
+import { useEffect, useRef } from "react";
 import RevealOnScroll from "../RevealOnScroll";
+import { gsap, ScrollTrigger } from "../../lib/motion";
+import { prefersReducedMotion } from "../../themes";
+
+interface Commit {
+  refs?: { label: string; head?: boolean }[];
+  meta: string;
+  title: string;
+  detail: string;
+  branch?: boolean;
+  root?: boolean;
+}
+
+// Newest first, the way `git log` reads.
+const log: Commit[] = [
+  {
+    refs: [{ label: "HEAD → main", head: true }, { label: "open-to-work" }],
+    meta: "now",
+    title: "Looking for backend & full-stack roles",
+    detail: "internships · full-time · interesting projects",
+  },
+  {
+    meta: "tag: shipped×5",
+    title: "Oi Tesla Pool · NestMate · GravityCloud · News Autopilot · KrishiKonnect",
+    detail: "release notes → see Selected work",
+  },
+  {
+    branch: true,
+    meta: "branch: competitive-programming",
+    title: "LeetCode & Codeforces",
+    detail: "focus: optimized algorithm design",
+  },
+  {
+    meta: "2021 — present",
+    title: "B.Sc. Computer Science & Engineering · Jagannath University",
+    detail: "CGPA 3.25 / 4.00",
+  },
+  {
+    root: true,
+    meta: "2019 — 2020 · initial commit",
+    title: "HSC Science · Birshrestho Munsi Abdur Rouf Public College",
+    detail: "GPA 5.00 / 5.00",
+  },
+];
 
 export default function About() {
+  const logRef = useRef<HTMLOListElement>(null);
+
+  // The rail draws itself as you scroll and each commit lands on it in turn.
+  useEffect(() => {
+    const list = logRef.current;
+    if (!list || prefersReducedMotion()) return;
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        list,
+        { "--rail": 0 },
+        {
+          "--rail": 1,
+          ease: "none",
+          scrollTrigger: { trigger: list, start: "top 75%", end: "bottom 60%", scrub: 0.6 },
+        },
+      );
+      gsap.utils.toArray<HTMLElement>(".commit", list).forEach((c) => {
+        gsap.from(c, {
+          opacity: 0,
+          x: 18,
+          duration: 0.6,
+          ease: "power3.out",
+          scrollTrigger: { trigger: c, start: "top 85%", once: true },
+        });
+      });
+    }, list);
+    ScrollTrigger.refresh();
+    return () => ctx.revert();
+  }, []);
+
   return (
     <section id="about">
       <RevealOnScroll>
         <div className="sh">
-          <div className="sh-label"><span className="sh-num">03</span> About</div>
-          <h2 className="sh-title">A bit of <em>background</em></h2>
+          <div className="sh-label">
+            <span className="sh-num">03</span> About
+          </div>
+          <h2 className="sh-title">
+            A bit of <em>history</em>
+          </h2>
         </div>
       </RevealOnScroll>
 
@@ -14,43 +92,35 @@ export default function About() {
         <RevealOnScroll delay={0.08}>
           <div className="about-text">
             <p>
-              Hi — I'm <strong>Khandaker Rafiul Islam</strong>, a Computer
-              Science student at Jagannath University, Dhaka. My focus is{" "}
-              <strong>backend engineering</strong> and designing systems that
-              scale under real-world load.
+              Hi — I'm <strong>Khandaker Rafiul Islam</strong>, a Computer Science student at Jagannath University, Dhaka.
+              My focus is <strong>backend engineering</strong> and designing systems that scale under real-world load.
             </p>
             <p>
-              I'm fluent in the <strong>MERN stack</strong>, Go, and Python, and
-              I apply rigorous
-              <strong> Data Structures & Algorithms</strong> thinking to every
-              system I build. I enjoy the whole stack — from schema design to
+              I'm fluent in the <strong>MERN stack</strong>, Go, and Python, and I apply rigorous
+              <strong> Data Structures & Algorithms</strong> thinking to every system I build — from schema design to
               responsive UI.
             </p>
             <p>
               Outside of project work, I sharpen my problem-solving on
-              <strong> LeetCode</strong> and <strong>Codeforces</strong>, with a
-              focus on optimized algorithm design.
+              <strong> LeetCode</strong> and <strong>Codeforces</strong>.
             </p>
-
             <div className="about-facts">
               <div className="fact">
-                <div className="fact-label">Location</div>
+                <div className="fact-label">Region</div>
                 <div className="fact-val">Dhaka, Bangladesh</div>
               </div>
               <div className="fact">
-                <div className="fact-label">Email</div>
-                <div className="fact-val" style={{ fontSize: "12px" }}>
-                  rafiul.islam.khandaker@gmail.com
-                </div>
+                <div className="fact-label">Protocols</div>
+                <div className="fact-val">English · Bangla</div>
               </div>
               <div className="fact">
-                <div className="fact-label">Languages</div>
-                <div className="fact-val">English · Bangla</div>
+                <div className="fact-label">Endpoint</div>
+                <div className="fact-val fact-email">rafiul.islam.khandaker@gmail.com</div>
               </div>
               <div className="fact">
                 <div className="fact-label">Status</div>
                 <div className="fact-val" style={{ color: "var(--acc)" }}>
-                  Open to Work ✓
+                  Open to work ✓
                 </div>
               </div>
             </div>
@@ -58,70 +128,31 @@ export default function About() {
         </RevealOnScroll>
 
         <RevealOnScroll delay={0.16}>
-          <div className="about-right">
-            <div className="edu-block">
-              <div className="edu-block-label">// education</div>
-              <div className="edu-item">
-                <div>
-                  <div className="edu-degree">
-                    B.Sc. in Computer Science & Engineering
-                  </div>
-                  <div className="edu-school">Jagannath University</div>
-                  <div className="edu-gpa">CGPA 3.25 / 4.00</div>
-                </div>
-                <div className="edu-year">2021 – Present</div>
-              </div>
-              <div className="edu-item">
-                <div>
-                  <div className="edu-degree">
-                    Higher Secondary Certificate — Science
-                  </div>
-                  <div className="edu-school">
-                    Birshrestho Munsi Abdur Rouf Public College
-                  </div>
-                  <div className="edu-gpa">GPA 5.00 / 5.00</div>
-                </div>
-                <div className="edu-year">2019 – 2020</div>
-              </div>
+          <div className="term">
+            <div className="term-bar">
+              <i />
+              <i />
+              <i />
+              <span>$ git log --graph rafi</span>
             </div>
-
-            <div className="achiev-block">
-              <div
-                className="edu-block-label"
-                style={{ marginBottom: "0", paddingBottom: "0" }}
-              >
-                // achievements
-              </div>
-              <div className="achiev-item">
-                <div className="achiev-icon">💻</div>
-                <div>
-                  <div className="achiev-title">Competitive Programming</div>
-                  <div className="achiev-desc">
-                    Active solver on LeetCode and Codeforces — focused on
-                    optimized algorithm design.
-                  </div>
-                </div>
-              </div>
-              <div className="achiev-item">
-                <div className="achiev-icon">🤝</div>
-                <div>
-                  <div className="achiev-title">Team Collaboration</div>
-                  <div className="achiev-desc">
-                    Strong technical communication and an agile development
-                    mindset.
-                  </div>
-                </div>
-              </div>
-              <div className="achiev-item">
-                <div className="achiev-icon">🌍</div>
-                <div>
-                  <div className="achiev-title">Bilingual</div>
-                  <div className="achiev-desc">
-                    Fluent in English (professional) and Bangla (native).
-                  </div>
-                </div>
-              </div>
-            </div>
+            <ol className="gitlog" ref={logRef}>
+              {log.map((c) => (
+                <li key={c.title} className={`commit ${c.branch ? "branch" : ""} ${c.root ? "root" : ""} ${c.refs ? "head" : ""}`}>
+                  {c.refs && (
+                    <div className="commit-refs">
+                      {c.refs.map((r) => (
+                        <span key={r.label} className={r.head ? "head" : ""}>
+                          {r.label}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                  {!c.refs && <span className="commit-meta">{c.meta}</span>}
+                  <b className="commit-title">{c.title}</b>
+                  <span className="commit-detail">{c.detail}</span>
+                </li>
+              ))}
+            </ol>
           </div>
         </RevealOnScroll>
       </div>

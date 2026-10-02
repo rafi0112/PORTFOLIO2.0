@@ -29,7 +29,7 @@ export function useInteractions() {
           gsap.to(el, { "--tx": `${dx * 0.22}px`, "--ty": `${dy * 0.3}px`, duration: 0.35, ease: "power3.out" });
         }
 
-        const card = target?.closest<HTMLElement>(".proj-card");
+        const card = target?.closest<HTMLElement>(".case");
         if (card) {
           const r = card.getBoundingClientRect();
           card.style.setProperty("--mx", `${e.clientX - r.left}px`);

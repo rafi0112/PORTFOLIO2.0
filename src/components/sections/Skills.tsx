@@ -1,81 +1,175 @@
-import React from "react";
+import { useEffect, useRef } from "react";
 import RevealOnScroll from "../RevealOnScroll";
+import { gsap, ScrollTrigger } from "../../lib/motion";
+import { prefersReducedMotion } from "../../themes";
 
-interface Skill {
-  icon: string;
+interface Layer {
+  id: string;
   name: string;
-  cat: string;
-  v: string;
+  skills: { name: string; note: string }[];
 }
 
-const skills1: Skill[] = [
-  { icon: "⚡", name: "Go", cat: "language", v: "v1" },
-  { icon: "🐍", name: "Python", cat: "language", v: "v2" },
-  { icon: "⚙️", name: "C++", cat: "language", v: "v3" },
-  { icon: "🟨", name: "JavaScript ES6+", cat: "language", v: "v6" },
-  { icon: "🔷", name: "TypeScript", cat: "language", v: "v2" },
-  { icon: "🌐", name: "React", cat: "web", v: "v2" },
-  { icon: "🟢", name: "Node.js", cat: "web", v: "v4" },
-  { icon: "🚂", name: "Express.js", cat: "web", v: "v1" },
-  { icon: "🍃", name: "MongoDB", cat: "database", v: "v4" },
-  { icon: "📱", name: "React Native", cat: "mobile", v: "v5" },
-  { icon: "🔑", name: "JWT Auth", cat: "backend", v: "v3" },
+// The stack, drawn the way a request travels through it.
+const layers: Layer[] = [
+  {
+    id: "L1",
+    name: "Client",
+    skills: [
+      { name: "React", note: "web ui" },
+      { name: "React Native", note: "mobile" },
+      { name: "TypeScript", note: "language" },
+      { name: "JavaScript ES6+", note: "language" },
+    ],
+  },
+  {
+    id: "L2",
+    name: "API · Edge",
+    skills: [
+      { name: "Node.js", note: "runtime" },
+      { name: "Express.js", note: "http" },
+      { name: "RESTful APIs", note: "contracts" },
+      { name: "JWT Auth", note: "identity" },
+    ],
+  },
+  {
+    id: "L3",
+    name: "Services",
+    skills: [
+      { name: "Go", note: "concurrency" },
+      { name: "Python", note: "language" },
+      { name: "C++", note: "language" },
+      { name: "Microservices", note: "architecture" },
+    ],
+  },
+  {
+    id: "L4",
+    name: "Data",
+    skills: [
+      { name: "PostgreSQL", note: "relational" },
+      { name: "MongoDB", note: "document" },
+      { name: "Supabase", note: "postgres + auth" },
+      { name: "SQL & NoSQL", note: "modelling" },
+    ],
+  },
+  {
+    id: "L5",
+    name: "Platform",
+    skills: [
+      { name: "Docker", note: "containers" },
+      { name: "CI/CD Pipelines", note: "delivery" },
+      { name: "GitHub Actions", note: "automation" },
+      { name: "Linux / Bash", note: "ops" },
+      { name: "Git & GitHub", note: "versioning" },
+    ],
+  },
 ];
 
-const skills2: Skill[] = [
-  { icon: "🐳", name: "Docker", cat: "devops", v: "v2" },
-  { icon: "🔄", name: "CI/CD Pipelines", cat: "devops", v: "v3" },
-  { icon: "🐧", name: "Linux / Bash", cat: "devops", v: "v1" },
-  { icon: "🐙", name: "Git & GitHub", cat: "devops", v: "v5" },
-  { icon: "⚡", name: "GitHub Actions", cat: "devops", v: "v6" },
-  { icon: "🧠", name: "DSA", cat: "fundamentals", v: "v4" },
-  { icon: "🏗️", name: "Microservices", cat: "architecture", v: "v1" },
-  { icon: "🗄️", name: "SQL & NoSQL", cat: "database", v: "v2" },
-  { icon: "🐘", name: "PostgreSQL", cat: "database", v: "v1" },
-  { icon: "⚡", name: "Supabase", cat: "backend", v: "v4" },
-  { icon: "🌐", name: "RESTful APIs", cat: "backend", v: "v3" },
-  { icon: "🔬", name: "Unit Testing", cat: "tools", v: "v5" },
+const crossCutting = [
+  { name: "DSA", note: "fundamentals" },
+  { name: "Unit Testing", note: "correctness" },
 ];
-
-const SkillCard: React.FC<{ skill: Skill }> = ({ skill }) => (
-  <div className={`sk-card ${skill.v}`}>
-    <div className="sk-icon">{skill.icon}</div>
-    <div>
-      <div className="sk-name">{skill.name}</div>
-      <div className="sk-cat">{skill.cat}</div>
-    </div>
-  </div>
-);
 
 export default function Skills() {
-  const createMarqueeContent = (skills: Skill[]) => {
-    const doubled = [...skills, ...skills];
-    return doubled.map((skill, idx) => <SkillCard key={idx} skill={skill} />);
-  };
+  const stackRef = useRef<HTMLDivElement>(null);
+  const packetRef = useRef<HTMLDivElement>(null);
+
+  // A packet descends the request rail exactly in step with the scroll, and
+  // the layer it is passing through lights up. Both are written straight to
+  // the DOM on every scroll frame (no easing, no React re-render), so the
+  // highlight never trails behind the scrollbar.
+  useEffect(() => {
+    const stack = stackRef.current;
+    const packet = packetRef.current;
+    if (!stack || !packet || prefersReducedMotion()) return;
+    const lanes = Array.from(stack.querySelectorAll<HTMLElement>(".layer"));
+    const setY = gsap.quickSetter(packet, "y", "px");
+    let current = -1;
+
+    const light = (idx: number) => {
+      if (idx === current) return;
+      lanes[current]?.classList.remove("lit");
+      lanes[idx]?.classList.add("lit");
+      current = idx;
+    };
+
+    const st = ScrollTrigger.create({
+      trigger: stack,
+      start: "top 65%",
+      end: "bottom 45%",
+      onUpdate: (self) => {
+        const y = self.progress * (stack.offsetHeight - 14);
+        setY(y);
+        // The last layer the packet has reached stays lit through the gap to
+        // the next one, so the highlight never blinks off mid-scroll.
+        let idx = -1;
+        lanes.forEach((l, i) => {
+          if (y >= l.offsetTop - 6) idx = i;
+        });
+        light(idx);
+      },
+      onLeave: () => light(-1),
+      onLeaveBack: () => light(-1),
+    });
+    return () => {
+      st.kill();
+      light(-1);
+    };
+  }, []);
 
   return (
     <section id="skills">
       <RevealOnScroll>
         <div className="sh">
-          <div className="sh-label"><span className="sh-num">01</span> Expertise</div>
-          <h2 className="sh-title">Tools I <em>reach for</em></h2>
-          <p className="sh-sub">
-            A multi-disciplinary toolkit spanning languages, frameworks,
-            systems, and DevOps.
-          </p>
+          <div className="sh-label">
+            <span className="sh-num">01</span> Expertise
+          </div>
+          <h2 className="sh-title">
+            Tools, by <em>layer</em>
+          </h2>
+          <p className="sh-sub">My stack, drawn the way I think about it — as one request travelling down through it.</p>
         </div>
       </RevealOnScroll>
 
-      <RevealOnScroll delay={0.08}>
-        <div className="skills-marquee-wrap">
-          <div className="skills-row" id="row1">
-            {createMarqueeContent(skills1)}
+      <div className="stack-wrap">
+        <div className="stack" ref={stackRef}>
+          <div className="stack-rail" aria-hidden>
+            <span className="stack-rail-label">↓ request</span>
+            <div className="stack-packet" ref={packetRef} />
           </div>
-          <div className="skills-row rev" id="row2">
-            {createMarqueeContent(skills2)}
-          </div>
+          {layers.map((layer) => (
+            <div key={layer.id} className="layer">
+              <div className="layer-label">
+                <span>{layer.id}</span>
+                <b>{layer.name}</b>
+              </div>
+              <ul className="layer-chips">
+                {layer.skills.map((s, si) => (
+                  <li key={s.name} className="chip" style={{ ["--i" as string]: si }}>
+                    <b>{s.name}</b>
+                    <span>{s.note}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
-      </RevealOnScroll>
+
+        <div className="crosscut">
+          <div className="layer-label">
+            <span>every layer</span>
+            <b>Cross-cutting</b>
+          </div>
+          <ul className="layer-chips">
+            {crossCutting.map((s) => (
+              <li key={s.name} className="chip">
+                <b>{s.name}</b>
+                <span>{s.note}</span>
+              </li>
+            ))}
+          </ul>
+          <p className="crosscut-note">// applied at every layer, not bolted on at the end</p>
+        </div>
+      </div>
     </section>
   );
 }

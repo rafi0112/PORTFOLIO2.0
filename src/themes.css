@@ -518,29 +518,8 @@
 }
 
 /* ============================================
-   PROJECT CARD SPOTLIGHT + MAGNETIC
+   MAGNETIC BUTTONS
 ============================================ */
-.proj-card {
-  position: relative;
-}
-.proj-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  z-index: 2;
-  opacity: 0;
-  transition: opacity 0.3s var(--ease);
-  background: radial-gradient(
-    420px circle at var(--mx, 50%) var(--my, 50%),
-    color-mix(in srgb, var(--acc) 10%, transparent),
-    transparent 60%
-  );
-}
-.proj-card:hover::before {
-  opacity: 1;
-}
 /* Magnetic pull — GSAP tweens --tx/--ty; `translate` composes with the
    existing hover `transform`, so the two never fight. */
 .btn-p,

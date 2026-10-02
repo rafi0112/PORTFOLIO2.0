@@ -4,6 +4,7 @@ import App from "./App.tsx";
 import "./index.css";
 import "./editorial.css";
 import "./themes.css";
+import "./system.css";
 import "./responsive.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
