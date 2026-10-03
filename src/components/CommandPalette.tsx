@@ -44,7 +44,7 @@ export default function CommandPalette({ open, onClose, gotoSection, pickTheme, 
       { id: "p-oi", group: "Projects", label: "Oi Tesla Pool — live demo", icon: "🛺", hint: "↗", run: open("https://oi-tesla-pool.vercel.app"), keywords: "ride pooling supabase" },
       { id: "p-nest", group: "Projects", label: "NestMate — live demo", icon: "🏠", hint: "↗", run: open("https://nestmate00.vercel.app"), keywords: "roommate" },
       { id: "p-gravity", group: "Projects", label: "GravityCloud — source", icon: "☁️", hint: "↗", run: open("https://github.com/rafi0112/Gravity-Cloud/tree/main/GravityCloud"), keywords: "ai autoscaling docker fastapi distributed" },
-      { id: "p-news", group: "Projects", label: "Bengali News Autopilot — source", icon: "📰", hint: "↗", run: open("https://github.com/rafi0112/news-paper-scrap"), keywords: "scraper facebook github actions supabase" },
+      { id: "p-news", group: "Projects", label: "News Autopilot — live demo", icon: "📰", hint: "↗", run: open("https://news-paper-scrap.vercel.app"), keywords: "news bangladesh palestine scraper feed shorts stories pwa facebook github actions supabase fastapi vercel" },
       { id: "p-krishi", group: "Projects", label: "KrishiKonnect — source", icon: "🌾", hint: "↗", run: open("https://github.com/rafi0112/agricultural-app"), keywords: "agri farmers mobile" },
       ...THEMES.map<Command>((t) => ({
         id: `t-${t.id}`,
