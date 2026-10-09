@@ -2,6 +2,41 @@
 
 A modern, responsive portfolio web application built with React, Vite, and TypeScript. Features smooth animations, dark/light theme toggle, interactive skills carousel, and a contact form.
 
+## Design versions
+
+This repository keeps every design, so any of them can be brought back at any time.
+
+| Design | Branch | Tag | What it looks like |
+|---|---|---|---|
+| **Editorial** (current, on `main`) | `redesign-editorial` | — | Warm paper and ink with an amber accent: 3D avatar that docks into a "quick hello" card, terminal-style toolkit, pinned horizontal work rail, system-design playground, light/dark theme |
+| **System design** (previous) | `design/system-v1` | `design-system-v1` | The portfolio drawn as a distributed system: 7 colour themes, Pip the blue-tit mascot, architecture case files, the "Scale this" playground, Ctrl+K command palette |
+
+### Look at a design without changing anything
+
+```bash
+git checkout design/system-v1   # the previous design
+npm install
+npm run dev
+```
+
+Come back to the current design:
+
+```bash
+git checkout main
+```
+
+### Make a design the live site again
+
+Point `main` at the design you want, then push. For example, to restore the previous design:
+
+```bash
+git checkout main
+git reset --hard design-system-v1
+git push --force-with-lease origin main
+```
+
+`git reset --hard` discards uncommitted changes on `main`, so commit or stash first. Nothing is lost: the current design stays on the `redesign-editorial` branch, and you can switch back the same way with `git reset --hard redesign-editorial`.
+
 ## Features
 
 - 🌙 **Dark/Light Theme Toggle** - Seamless theme switching with localStorage persistence
