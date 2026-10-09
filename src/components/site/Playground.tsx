@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import RevealOnScroll from "../RevealOnScroll";
+import { Reveal, SectionHead } from "./ui";
 import { prefersReducedMotion } from "../../themes";
 
 /*
@@ -245,23 +245,25 @@ export default function Playground() {
   const statusText = m.level === "bad" ? "overloaded — shedding requests" : m.level === "warn" ? "degraded — running hot" : "healthy";
 
   return (
-    <section id="playground">
-      <RevealOnScroll>
-        <div className="sh">
-          <div className="sh-label">
-            <span className="sh-num">↯</span> Playground
-          </div>
-          <h2 className="sh-title">
-            Scale <em>this</em>
-          </h2>
-          <p className="sh-sub">A toy model of the systems I like to build. Push the traffic, add replicas, kill one — and watch what happens.</p>
-        </div>
-      </RevealOnScroll>
+    <section id="playground" className="sec sec-band">
+      <SectionHead
+        index="05"
+        label="The playground"
+        aside="Try it yourself"
+        title="Scale"
+        accent="this system."
+        side={
+          <p>
+            A toy model of the systems I like to build. Push the traffic, add replicas, kill one — and watch what
+            happens.
+          </p>
+        }
+      />
 
-      <RevealOnScroll delay={0.08}>
+      <Reveal delay={0.08}>
         <div className="pg">
           <div className="pg-panel">
-            <span className="pg-eyebrow">// control plane</span>
+            <span className="pg-eyebrow">Control plane</span>
 
             <label className="pg-range">
               <span>
@@ -344,7 +346,7 @@ export default function Playground() {
             </svg>
           </div>
         </div>
-      </RevealOnScroll>
+      </Reveal>
     </section>
   );
 }

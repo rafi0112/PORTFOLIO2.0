@@ -1,20 +1,29 @@
 <!doctype html>
-<html lang="en" data-theme="light" data-mode="light">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content" />
-    <title>Khandaker Rafiul Islam</title>
+    <title>Khandaker Rafiul Islam | Full-Stack Developer in Dhaka</title>
+    <meta
+      name="description"
+      content="Khandaker Rafiul Islam — full-stack developer and CSE undergraduate in Dhaka, building race-safe backends, scalable systems and clean React interfaces."
+    />
+    <meta name="theme-color" content="#F4F1E8" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0E1322" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
     <script>
-      // Apply the saved theme before first paint so there is no flash.
+      // Apply the saved (or system) theme before first paint — no flash.
       (function () {
-        var dark = { dark: 1, navy: 1, emerald: 1 };
-        var ids = ["light", "dark", "sage", "terracotta", "navy", "emerald", "blush"];
         var t;
-        try { t = localStorage.getItem("rafi-theme"); } catch (e) {}
-        if (ids.indexOf(t) < 0) t = "light";
+        try { t = localStorage.getItem("rk-theme"); } catch (e) {}
+        if (t !== "light" && t !== "dark") t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
         document.documentElement.setAttribute("data-theme", t);
-        document.documentElement.setAttribute("data-mode", dark[t] ? "dark" : "light");
       })();
     </script>
   </head>

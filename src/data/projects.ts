@@ -10,6 +10,10 @@ export interface Project {
   id: string;
   title: string;
   subtitle: string;
+  /** One paragraph for the project card. */
+  summary: string;
+  /** When it was built (résumé / GitHub history). */
+  when: string;
   icon: string;
   image?: string;
   featured?: boolean;
@@ -38,6 +42,9 @@ export const projects: Project[] = [
     id: "oi-tesla-pool",
     title: "Oi Tesla Pool",
     subtitle: "// direction-aware ride pooling for Dhaka",
+    summary:
+      "Ride pooling for Dhaka's battery rickshaws: riders heading within 90° share one vehicle and each pay 20% less. Seat booking stays race-safe under concurrent requests through atomic SQL, row locks and a finite-state machine.",
+    when: "Sep 2026",
     icon: "🛺",
     image: "/oi-tesla-pool.webp",
     featured: true,
@@ -110,6 +117,9 @@ export const projects: Project[] = [
     id: "nestmate",
     title: "NestMate",
     subtitle: "// roommate finder & household hub",
+    summary:
+      "A roommate finder and household hub: listings with nearby search, join-code households, a shared meal ledger with fair-share dues, direct messages and room chat.",
+    when: "May 2026",
     icon: "🏠",
     status: "live",
     points: [
@@ -178,6 +188,9 @@ export const projects: Project[] = [
     id: "gravity-cloud",
     title: "GravityCloud",
     subtitle: "// self-scaling, distributed AI infrastructure",
+    summary:
+      "A local AI chat app split into containerised services behind an Nginx load balancer. A scheduler scales the FastAPI gateway from one to three replicas on queue depth, with Prometheus and Grafana watching it all.",
+    when: "Aug 2026",
     icon: "☁️",
     status: "done",
     points: [
@@ -248,6 +261,9 @@ export const projects: Project[] = [
     id: "news-scraper",
     title: "News Autopilot",
     subtitle: "// scrape, store, publish and read — on a schedule",
+    summary:
+      "A news pipeline that runs itself: GitHub Actions scrapes Bangladeshi newspapers every five minutes into Supabase, publishes photo-cards to Facebook, and serves a reader PWA with a personal For You feed.",
+    when: "Oct 2026",
     icon: "📰",
     status: "live",
     points: [
@@ -327,6 +343,9 @@ export const projects: Project[] = [
     id: "krishikonnect",
     title: "KrishiKonnect",
     subtitle: "// agri-tech mobile application",
+    summary:
+      "An Expo / React Native marketplace connecting farmers and shops with buyers — live Firestore listeners, maps with directions, and a weather forecast for planning sales.",
+    when: "2025",
     icon: "🌾",
     status: "done",
     points: [
