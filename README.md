@@ -1,6 +1,6 @@
-# Khandaker Rafiul Islam — Portfolio (React)
+# Khandaker Rafiul Islam — Portfolio
 
-A modern, responsive portfolio web application built with React, Vite, and TypeScript. Features smooth animations, dark/light theme toggle, interactive skills carousel, and a contact form.
+Personal portfolio of a full-stack developer in Dhaka, built with React, TypeScript and Vite. An editorial design in warm paper and ink with one amber accent, a 3D avatar that walks you through the page, and every project shipped with its architecture and trade-offs.
 
 ## Design versions
 
@@ -39,19 +39,22 @@ git push --force-with-lease origin main
 
 ## Features
 
-- 🌙 **Dark/Light Theme Toggle** - Seamless theme switching with localStorage persistence
-- ✨ **Smooth Animations** - Scroll reveal animations, typing effect, and floating elements
-- 📱 **Fully Responsive** - Mobile-first design with hamburger menu
-- 🎨 **Modern UI** - Custom CSS with CSS variables for easy theming
-- ⚡ **Fast Performance** - Built with Vite for optimal build times
-- 🎯 **Interactive Components** - Marquee skills carousel, hover effects, and smooth transitions
+- 🧑 **Avatar guide** — a 3D avatar stands in the hero, then glides down and docks as a "quick hello" card as you scroll
+- 🗂️ **Pinned work rail** — scrolling the page slides the project cards sideways, on desktop and phones
+- 🧭 **Project stories** — each project opens a Story / Architecture / Trade-offs view with a live architecture diagram
+- 🧰 **Toolkit terminal** — skill tiles with filters; picking one opens what it was used for, right in the text
+- 🕹️ **System-design playground** — push traffic, add replicas, kill one and watch latency, errors and load react
+- 🌗 **Light / dark theme** — remembers the visitor's choice and follows the device setting by default
+- 📱 **Fully responsive** — phone layout and type sizes follow the reference design; "Menu +" navigation on phones
+- ♿ **Accessible motion** — every animation respects `prefers-reduced-motion`
 
 ## Tech Stack
 
-- **Frontend Framework**: React 18 with TypeScript
-- **Build Tool**: Vite
-- **Styling**: CSS3 with Custom Properties (CSS Variables)
-- **Canvas**: Interactive star background with mouse gravity
+- **Framework**: React 18 + TypeScript, built with Vite
+- **Motion**: GSAP (ScrollTrigger) for the pinned rail and reveals, Lenis for smooth scrolling
+- **Styling**: one hand-written stylesheet (`src/site.css`) with CSS custom properties for both themes
+- **Type**: Space Grotesk throughout, Georgia italic for accents, JetBrains Mono inside diagrams
+- **Backend**: Express + Nodemailer contact API (`server/`, `api/` for Vercel)
 
 ## Getting Started
 
@@ -123,92 +126,67 @@ npm run preview
 ```
 src/
 ├── components/
-│   ├── Navigation.tsx          # Top navbar with theme toggle
-│   ├── ScrollProgress.tsx      # Scroll progress bar
-│   ├── StarsBackground.tsx     # Canvas-based star animation
-│   ├── Footer.tsx              # Footer component
-│   ├── RevealOnScroll.tsx      # Scroll reveal animation wrapper
-│   └── sections/
-│       ├── Hero.tsx            # Hero section with typing effect
-│       ├── Skills.tsx          # Skills marquee carousel
-│       ├── Projects.tsx        # Featured projects grid
-│       ├── About.tsx           # About section with education
-│       └── Contact.tsx         # Contact form and social links
-├── App.tsx                     # Main app component
-├── main.tsx                    # React entry point
-└── index.css                   # Global styles and theme system
+│   ├── site/
+│   │   ├── Nav.tsx           # Centred pill nav, theme switch, "Menu +" on phones
+│   │   ├── Hero.tsx          # Name watermark, headline, avatar slot
+│   │   ├── AvatarGuide.tsx   # The avatar that glides from the hero into the corner card
+│   │   ├── About.tsx         # Bio, flippable ID card, quick facts
+│   │   ├── Toolkit.tsx       # Skill terminal and the expanding skill details
+│   │   ├── Work.tsx          # Pinned horizontal project rail and project story dialog
+│   │   ├── Journey.tsx       # Project timeline and education
+│   │   ├── Playground.tsx    # System-design simulator
+│   │   ├── Contact.tsx       # Contact details, form and footer
+│   │   └── ui.tsx            # Reveal-on-scroll and section header helpers
+│   └── ArchDiagram.tsx       # Hand-placed architecture diagrams, scaled to fit
+├── data/
+│   ├── profile.ts            # Personal details, toolkit, journey, education
+│   └── projects.ts           # Projects: story, architecture and trade-offs
+├── lib/motion.ts             # GSAP + Lenis setup, scroll helpers
+├── App.tsx                   # Page composition
+├── main.tsx                  # React entry point
+└── site.css                  # All styles, both themes, responsive rules
+public/
+├── avatar.webp               # 3D avatar (transparent background)
+├── profile.png               # Photo on the ID card
+├── oi-tesla-pool.webp        # Rickshaw illustration for Oi Tesla Pool
+└── resume.pdf                # Downloadable résumé
 server/
-├── index.js                    # Express API for contact form
-└── .env.example                # Backend environment template
+└── index.js                  # Express API for the contact form
 ```
 
-## Features Overview
+To change content, edit `src/data/profile.ts` and `src/data/projects.ts` — the sections read everything from there.
 
-### Hero Section
+## Sections
 
-- Animated name display
-- Typing effect for role description
-- CTA buttons (Email, GitHub, LinkedIn)
-- Info chips (location, stack, status)
-
-### Skills Section
-
-- Dual marquee scrolling carousels
-- Color-coded skill cards
-- Category labels
-- Hover animations
-
-### Projects Section
-
-- Project cards with banners
-- Status badges (Live, Completed)
-- Tech stack labels
-- Project links
-
-### About Section
-
-- Personal bio
-- Education details with GPA
-- Achievements section
-- Key facts cards
-
-### Contact Section
-
-- Contact information cards
-- Contact form with validation
-- Social media links
-- Form submission feedback
+1. **Hero** — name watermark, "Full-Stack & Backend Developer.", links to work, contact and the résumé
+2. **About** — bio, an ID card that tilts with the pointer and flips on click, quick facts
+3. **Toolkit** — the stack as tiles in a terminal window, filterable by group
+4. **Work** — five projects on a pinned rail: Oi Tesla Pool, News Autopilot, GravityCloud, NestMate, KrishiKonnect
+5. **Journey** — a timeline of projects with education below
+6. **Playground** — a toy model of a scaled web service
+7. **Contact** — email, phone, WhatsApp, résumé and a message form
 
 ## Theme System
 
-The portfolio uses CSS custom properties for theming. Change theme by updating the `data-theme` attribute on the `<html>` element:
+Both themes are CSS custom properties keyed on the `data-theme` attribute of `<html>`. A small script in `index.html` applies the saved (or system) theme before first paint, so the page never flashes.
 
 ```typescript
 document.documentElement.setAttribute("data-theme", "light" | "dark");
 ```
 
-### Color Palette
-
-**Dark Theme**:
-
-- Primary: `#00E396` (Green accent)
-- Background: `#050A08`
-- Surface: `#101A15`
-- Text: `#EDF7F2`
-
-**Light Theme**:
-
-- Primary: `#00965C` (Dark Green)
-- Background: `#F2FAF6`
-- Surface: `#FFFFFF`
-- Text: `#081A10`
+| Token | Light | Dark |
+|---|---|---|
+| Background `--bg` | `#F4F1E8` | `#0E1322` |
+| Ink / text `--ink` | `#10172A` | `#EFE9DC` |
+| Accent `--acc` | `#A96212` | `#DD9A50` |
+| Secondary text `--text2` | `#64665F` | `#A3A49E` |
 
 ## Responsive Breakpoints
 
-- **Desktop**: 1280px+ (full layout)
-- **Tablet**: 900px (2-column → 1-column)
-- **Mobile**: 700px (hide nav center, show hamburger)
-- **Small Mobile**: 480px (optimized padding and button sizes)
+- **Desktop**: above 1000px — centred pill nav, side-by-side hero
+- **Tablet**: 1000px — stacked hero with the avatar on top, "Menu +" navigation
+- **Small tablet**: 900px — single-column sections, compact project cards
+- **Phone**: 600px — the reference's mobile type scale and button sizes
 
 ## Browser Support
 
