@@ -848,16 +848,15 @@ button.arch-node {
   align-items: center;
   justify-self: start;
   width: min(100%, 360px);
-  padding-bottom: 4px;
 }
 .hero-avatar-slot {
   width: 100%;
   aspect-ratio: 2 / 3;
 }
+/* The avatar is a separate layer on top, so the chip sits just below its feet. */
 .hero-avatar .chip-hello {
   position: relative;
-  z-index: 801;
-  margin-top: -22px;
+  margin-top: 4px;
 }
 .hero-foot {
   position: relative;
@@ -2412,10 +2411,6 @@ button.arch-node {
     justify-self: center;
     width: min(56vw, 260px);
     padding-bottom: 22px;
-  }
-  /* The avatar is a separate layer on top, so keep the chip clear of it. */
-  .hero-avatar .chip-hello {
-    margin-top: 10px;
   }
   .nav {
     grid-template-columns: auto 1fr auto;
