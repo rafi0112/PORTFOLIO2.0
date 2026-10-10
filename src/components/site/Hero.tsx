@@ -50,8 +50,9 @@ export default function Hero({ onHello }: { onHello: () => void }) {
           </span>
         </h1>
         <p className="hero-sub hero-fade">
-          Solid backends. Clean interfaces.
-          <br />
+          Solid backends. Clean interfaces.{" "}
+          {/* Line break on wide screens only; on phones the line runs full width. */}
+          <br className="br-wide" />
           <b>Systems that stay correct.</b>
         </p>
         <div className="hero-ctas hero-fade">

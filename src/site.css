@@ -848,7 +848,7 @@ button.arch-node {
   align-items: center;
   justify-self: start;
   width: min(100%, 360px);
-  padding-bottom: 30px;
+  padding-bottom: 4px;
 }
 .hero-avatar-slot {
   width: 100%;
@@ -2135,6 +2135,30 @@ button.arch-node {
   font-size: 10px;
   color: var(--text2);
 }
+.to-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  padding-bottom: 2px;
+  transition:
+    background-size 0.35s var(--ease),
+    color 0.2s;
+}
+.to-top:hover {
+  color: var(--acc);
+  background-size: 100% 1px;
+}
+.to-top span {
+  transition: transform 0.3s var(--ease);
+}
+.to-top:hover span {
+  transform: translateY(-3px);
+}
 .foot-tag {
   font-size: 8px;
   letter-spacing: 1.6px;
@@ -2374,7 +2398,7 @@ button.arch-node {
     grid-template-columns: minmax(0, 1fr);
     grid-template-rows: auto;
     min-height: auto;
-    padding-top: 84px;
+    padding-top: calc(100px + max(88px, 16.8vw));
   }
   .hero-tag {
     display: none;
@@ -2468,20 +2492,34 @@ button.arch-node {
     align-items: flex-start;
     gap: 18px;
   }
-  .timeline::before,
-  .timeline::after,
-  .tl-dot {
-    display: none;
+  /* Vertical timeline on phones: the line and dots run down the left edge. */
+  .timeline::before {
+    left: 10px;
+  }
+  .timeline::after {
+    left: 9.5px;
   }
   .tl-item {
-    grid-template-columns: minmax(0, 1fr);
-    padding-bottom: 18px;
+    grid-template-columns: 21px minmax(0, 1fr);
+    column-gap: 12px;
+    padding-bottom: 22px;
+  }
+  .tl-dot {
+    grid-column: 1;
+    grid-row: 1;
+    margin-top: 10px;
   }
   .tl-when {
+    grid-column: 2;
+    grid-row: 1;
     display: flex;
     align-items: baseline;
     gap: 14px;
     padding: 0 0 10px;
+  }
+  .tl-card {
+    grid-column: 2;
+    grid-row: 2;
   }
   .tl-when b {
     order: -1;
@@ -2521,12 +2559,16 @@ button.arch-node {
   }
   .hero-title {
     margin: 14px 0 18px;
+    font-size: clamp(45px, 19vw, 88px);
+  }
+  .br-wide {
+    display: none;
   }
   .hero-title em {
     font-size: 1.05em;
   }
   .hero-sub {
-    font-size: 12px;
+    font-size: 13px;
   }
   .sec-title {
     font-size: 49px;

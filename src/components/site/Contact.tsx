@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Reveal, SectionHead } from "./ui";
 import { profile } from "../../data/profile";
+import { scrollToId } from "../../lib/motion";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -129,6 +130,9 @@ export default function Contact() {
         </span>
         <span>© 2026 {profile.name}</span>
         <span className="foot-tag">Thoughtful systems. Human interfaces.</span>
+        <button className="to-top" onClick={() => scrollToId("home")}>
+          Back to top <span aria-hidden>↑</span>
+        </button>
       </footer>
     </section>
   );
