@@ -5,7 +5,7 @@ import { projects, type Project } from "../../data/projects";
 import { gsap, lockScroll, ScrollTrigger } from "../../lib/motion";
 
 // Flagship first, then newest first.
-const ORDER = ["oi-tesla-pool", "news-scraper", "gravity-cloud", "nestmate", "krishikonnect"];
+const ORDER = ["oi-tesla-pool", "bswa", "news-scraper", "gravity-cloud", "nestmate", "krishikonnect"];
 const ordered = ORDER.map((id) => projects.find((p) => p.id === id)!).filter(Boolean);
 
 const isCode = (l: { label: string }) => l.label.includes("⌥");

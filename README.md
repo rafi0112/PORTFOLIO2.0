@@ -161,7 +161,7 @@ To change content, edit `src/data/profile.ts` and `src/data/projects.ts` — the
 1. **Hero** — name watermark, "Full-Stack & Backend Developer.", links to work, contact and the résumé
 2. **About** — bio, an ID card that tilts with the pointer and flips on click, quick facts
 3. **Toolkit** — the stack as tiles in a terminal window, filterable by group
-4. **Work** — five projects on a pinned rail: Oi Tesla Pool, News Autopilot, GravityCloud, NestMate, KrishiKonnect
+4. **Work** — six projects on a pinned rail: Oi Tesla Pool, BSWA, News Autopilot, GravityCloud, NestMate, KrishiKonnect
 5. **Journey** — a timeline of projects with education below
 6. **Playground** — a toy model of a scaled web service
 7. **Contact** — email, phone, WhatsApp, résumé and a message form
