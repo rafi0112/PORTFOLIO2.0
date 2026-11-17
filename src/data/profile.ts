@@ -13,7 +13,7 @@ export const profile = {
   github: "https://github.com/rafi0112",
   linkedin: "https://www.linkedin.com/in/khandaker-rafiul-islam-6b80882b2/",
   resume: "/resume.pdf",
-  resumeName: "Khandaker_Rafiul_Islam_Resume.pdf",
+  resumeName: "Khandaker Rafiul Islam Resume.pdf",
   maps: "https://maps.google.com/?q=Dhaka,Bangladesh",
 };
 
