@@ -31,7 +31,7 @@ export interface Tool {
 // The tiles in the toolkit window. `used` links each tool to real projects.
 export const tools: Tool[] = [
   { name: "TypeScript", mark: "TS", group: "Languages", used: ["oi-tesla-pool", "nestmate", "krishikonnect"] },
-  { name: "JavaScript", mark: "JS", group: "Languages", used: ["bswa", "news-scraper"] },
+  { name: "JavaScript", mark: "JS", group: "Languages", used: ["still", "bswa", "news-scraper"] },
   { name: "Python", mark: "Py", group: "Languages", used: ["gravity-cloud", "news-scraper"] },
   { name: "Go", mark: "Go", group: "Languages", used: ["bswa"] },
   { name: "C++", mark: "C+", group: "Languages", note: "Data structures, algorithms and competitive programming." },
@@ -93,9 +93,18 @@ export interface Milestone {
 // Newest first. Dates from the résumé and GitHub history.
 export const journey: Milestone[] = [
   {
-    when: "October 2026",
+    when: "November 2026",
     year: "2026",
     tag: "Latest ship",
+    title: "STILL.",
+    org: "Browser extension · Chrome & Edge · Open source",
+    body: "A mindful-browsing extension that floats 3D emoji reactions and your own goals up the page instead of blocking it: per-site permissions, a closed Shadow DOM overlay, focus sessions and local-only insights, with a Bangla promo video recorded from the real extension.",
+    techs: ["JavaScript", "Chrome Extensions", "Shadow DOM", "Canvas", "Puppeteer"],
+  },
+  {
+    when: "October 2026",
+    year: "2026",
+    tag: "Full-stack platform",
     title: "BSWA",
     org: "Community platform · Live on Cloudflare Pages + Render",
     body: "A bilingual platform for Brahmanbaria students and alumni at Jagannath University: public directory and heritage site, reviewed membership and a full admin panel, on a Go API and Supabase Postgres with row level security.",
